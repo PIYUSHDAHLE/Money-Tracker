@@ -45,6 +45,13 @@ export default function Dashboard() {
   const isDark = theme === "dark";
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<any>(null);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+const [deleteId, setDeleteId] = useState<string | null>(null);
+function handleDelete(id: string) {
+  setDeleteId(id);
+  setDeleteOpen(true);
+}
+
   const [form, setForm] = useState<{
     title: string;
     amount: number;
@@ -129,16 +136,16 @@ export default function Dashboard() {
     }
   }
 
-  async function handleDelete(id: string) {
-    if (!confirm("Delete transaction?")) return;
-    dispatch(optimisticRemove(id));
-    try {
-      await dispatch(removeTx(id)).unwrap();
-    } catch (err) {
-      alert("Delete failed");
-      if (user) dispatch(fetchUserTx(user.id));
-    }
-  }
+  // async function handleDelete(id: string) {
+  //   if (!confirm("Delete transaction?")) return;
+  //   dispatch(optimisticRemove(id));
+  //   try {
+  //     await dispatch(removeTx(id)).unwrap();
+  //   } catch (err) {
+  //     alert("Delete failed");
+  //     if (user) dispatch(fetchUserTx(user.id));
+  //   }
+  // }
 
   // ---------------- ECharts Config ----------------
   const chartOption = {
@@ -440,6 +447,44 @@ export default function Dashboard() {
           {editing ? "Save" : "Create"}
         </Button>
       )}
+    </ModalFooter>
+  </ModalContent>
+</Modal>
+
+{/* delete confirmation modal */}
+<Modal
+  isOpen={deleteOpen}
+  onOpenChange={(isOpen) => {
+    setDeleteOpen(isOpen);
+    if (!isOpen) setDeleteId(null);
+  }}
+>
+  <ModalContent>
+    <ModalHeader>Confirm Delete</ModalHeader>
+    <ModalBody>
+      Are you sure you want to delete this transaction?
+    </ModalBody>
+    <ModalFooter>
+      <Button variant="solid" onClick={() => setDeleteOpen(false)}>
+        Cancel
+      </Button>
+      <Button
+        color="danger"
+        onClick={async () => {
+          if (!deleteId) return;
+          try {
+            dispatch(optimisticRemove(deleteId));
+            await dispatch(removeTx(deleteId)).unwrap();
+          } catch (err) {
+            alert("Delete failed");
+            if (user) dispatch(fetchUserTx(user.id));
+          }
+          setDeleteOpen(false);
+          setDeleteId(null);
+        }}
+      >
+        Delete
+      </Button>
     </ModalFooter>
   </ModalContent>
 </Modal>
