@@ -1,0 +1,27 @@
+import { useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Dashboard from './pages/Dashboard'
+import ProtectedRoute from './components/ProtectedRoute'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useSelector } from "react-redux";
+import { RootState } from "./store";
+
+export default function App() {
+    const theme = useSelector((s: RootState) => s.theme.mode);
+  useEffect(() => { AOS.init({ duration: 700 }); }, []);
+
+  return (
+     <div className={theme === "light" ? "light min-h-screen" : "dark min-h-screen"}>
+             <Navbar />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
+        </Routes>
+    </div>
+  );
+}
