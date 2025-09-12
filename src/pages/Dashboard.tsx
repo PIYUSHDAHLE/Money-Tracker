@@ -136,17 +136,6 @@ function handleDelete(id: string) {
     }
   }
 
-  // async function handleDelete(id: string) {
-  //   if (!confirm("Delete transaction?")) return;
-  //   dispatch(optimisticRemove(id));
-  //   try {
-  //     await dispatch(removeTx(id)).unwrap();
-  //   } catch (err) {
-  //     alert("Delete failed");
-  //     if (user) dispatch(fetchUserTx(user.id));
-  //   }
-  // }
-
   // ---------------- ECharts Config ----------------
   const chartOption = {
     backgroundColor: isDark ? "#1a1a1a" : "#f0f8ff",
@@ -256,7 +245,12 @@ function handleDelete(id: string) {
         <Card className="bg-[#db29e746] dark:bg-[#1a1a1a]">
           <CardHeader>Total Balance</CardHeader>
           <CardBody>
-            <strong>₹{totals.income - totals.expense}</strong>
+            <strong> ₹
+      {totals.income -
+        (totals.expense +
+          totals.investment +
+          totals.loan +
+          totals.transfer)}</strong>
           </CardBody>
         </Card>
       </div>
