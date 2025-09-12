@@ -39,12 +39,10 @@ export default function Dashboard() {
   const user = useSelector((s: RootState) => s.auth.user);
   const items = useSelector((s: RootState) => s.transactions.items);
   const loading = useSelector((s: RootState) => s.transactions.loading);
+  const [readOnly, setReadOnly] = useState(false);
   const dispatch = useAppDispatch();
-
-const theme = useSelector((s: RootState) => s.theme.mode);
-const isDark = theme === "dark";
-
-
+  const theme = useSelector((s: RootState) => s.theme.mode);
+  const isDark = theme === "dark";
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<any>(null);
   const [form, setForm] = useState<{
@@ -57,6 +55,18 @@ const isDark = theme === "dark";
   useEffect(() => {
     if (user) dispatch(fetchUserTx(user.id));
   }, [user]);
+
+    function openForRead(tx: any) {
+    setEditing(tx);
+    setForm({
+      title: tx.title,
+      amount: tx.amount,
+      type: tx.type,
+      notes: tx.notes || "",
+    });
+    setReadOnly(true);
+    setOpen(true);
+  }
 
   const totals = items.reduce(
     (acc, t) => {
@@ -131,68 +141,68 @@ const isDark = theme === "dark";
   }
 
   // ---------------- ECharts Config ----------------
-const chartOption = {
-  backgroundColor: isDark ? "#1a1a1a" : "#f0f8ff",
-  tooltip: { trigger: "axis" },
-  legend: {
-    data: ["Income", "Expense", "Predicted Savings"],
-    textStyle: { color: isDark ? "#fff" : "#000" },
-  },
-  xAxis: {
-    type: "category",
-    data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-    axisLine: { lineStyle: { color: isDark ? "#fff" : "#000" } },
-    axisLabel: { color: isDark ? "#fff" : "#000" },
-  },
-  yAxis: {
-    type: "value",
-    axisLine: { lineStyle: { color: isDark ? "#fff" : "#000" } },
-    axisLabel: { color: isDark ? "#fff" : "#000" },
-  },
-  series: [
-    {
-      name: "Income",
-      type: "bar",
-      data: [
-        totals.income,
-        totals.income * 1.1,
-        totals.income * 1.2,
-        totals.income * 1.3,
-        totals.income * 1.4,
-        totals.income * 1.5,
-      ],
-      itemStyle: { color: isDark ? "#4f9cf0" : "#4682B4" },
+  const chartOption = {
+    backgroundColor: isDark ? "#1a1a1a" : "#f0f8ff",
+    tooltip: { trigger: "axis" },
+    legend: {
+      data: ["Income", "Expense", "Predicted Savings"],
+      textStyle: { color: isDark ? "#fff" : "#000" },
     },
-    {
-      name: "Expense",
-      type: "bar",
-      data: [
-        totals.expense,
-        totals.expense * 1.05,
-        totals.expense * 1.1,
-        totals.expense * 1.15,
-        totals.expense * 1.2,
-        totals.expense * 1.25,
-      ],
-      itemStyle: { color: isDark ? "#6fb9f0" : "#87CEEB" },
+    xAxis: {
+      type: "category",
+      data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      axisLine: { lineStyle: { color: isDark ? "#fff" : "#000" } },
+      axisLabel: { color: isDark ? "#fff" : "#000" },
     },
-    {
-      name: "Predicted Savings",
-      type: "line",
-      smooth: true,
-      data: [
-        totals.income - totals.expense,
-        totals.income * 1.1 - totals.expense * 1.05,
-        totals.income * 1.2 - totals.expense * 1.1,
-        totals.income * 1.3 - totals.expense * 1.15,
-        totals.income * 1.4 - totals.expense * 1.2,
-        totals.income * 1.5 - totals.expense * 1.25,
-      ],
-      lineStyle: { color: isDark ? "#fff" : "#000", width: 3 },
-      symbolSize: 10,
+    yAxis: {
+      type: "value",
+      axisLine: { lineStyle: { color: isDark ? "#fff" : "#000" } },
+      axisLabel: { color: isDark ? "#fff" : "#000" },
     },
-  ],
-}
+    series: [
+      {
+        name: "Income",
+        type: "bar",
+        data: [
+          totals.income,
+          totals.income * 1.1,
+          totals.income * 1.2,
+          totals.income * 1.3,
+          totals.income * 1.4,
+          totals.income * 1.5,
+        ],
+        itemStyle: { color: isDark ? "#4f9cf0" : "#4682B4" },
+      },
+      {
+        name: "Expense",
+        type: "bar",
+        data: [
+          totals.expense,
+          totals.expense * 1.05,
+          totals.expense * 1.1,
+          totals.expense * 1.15,
+          totals.expense * 1.2,
+          totals.expense * 1.25,
+        ],
+        itemStyle: { color: isDark ? "#6fb9f0" : "#87CEEB" },
+      },
+      {
+        name: "Predicted Savings",
+        type: "line",
+        smooth: true,
+        data: [
+          totals.income - totals.expense,
+          totals.income * 1.1 - totals.expense * 1.05,
+          totals.income * 1.2 - totals.expense * 1.1,
+          totals.income * 1.3 - totals.expense * 1.15,
+          totals.income * 1.4 - totals.expense * 1.2,
+          totals.income * 1.5 - totals.expense * 1.25,
+        ],
+        lineStyle: { color: isDark ? "#fff" : "#000", width: 3 },
+        symbolSize: 10,
+      },
+    ],
+  };
 
   return (
     <div className="container mx-auto p-6 space-y-6 dark:bg-black">
@@ -206,37 +216,37 @@ const chartOption = {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card>
+        <Card className="bg-[#1ce42a57] dark:bg-[#1a1a1a]">
           <CardHeader>Income</CardHeader>
           <CardBody>
             <strong>₹{totals.income}</strong>
           </CardBody>
         </Card>
-        <Card>
+        <Card className="bg-[#e4131352] dark:bg-[#1a1a1a]">
           <CardHeader>Expense</CardHeader>
           <CardBody>
             <strong>₹{totals.expense}</strong>
           </CardBody>
         </Card>
-        <Card>
+        <Card className="bg-[#1924b427] dark:bg-[#1a1a1a]">
           <CardHeader>Investment</CardHeader>
           <CardBody>
             <strong>₹{totals.investment}</strong>
           </CardBody>
         </Card>
-        <Card>
+        <Card className="bg-[#e4c91b4f] dark:bg-[#1a1a1a]">
           <CardHeader>Loan</CardHeader>
           <CardBody>
             <strong>₹{totals.loan}</strong>
           </CardBody>
         </Card>
-        <Card>
+        <Card className="bg-[#7214dd48] dark:bg-[#1a1a1a]">
           <CardHeader>Transfer</CardHeader>
           <CardBody>
             <strong>₹{totals.transfer}</strong>
           </CardBody>
         </Card>
-        <Card>
+        <Card className="bg-[#db29e746] dark:bg-[#1a1a1a]">
           <CardHeader>Total Balance</CardHeader>
           <CardBody>
             <strong>₹{totals.income - totals.expense}</strong>
@@ -245,64 +255,76 @@ const chartOption = {
       </div>
 
       {/* Transactions Table */}
-      <Card>
-        <CardHeader>Transactions</CardHeader>
-        <CardBody>
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <Table aria-label="Transactions table">
-              <TableHeader>
-                <TableColumn>Title</TableColumn>
-                <TableColumn>Amount</TableColumn>
-                <TableColumn>Type</TableColumn>
-                <TableColumn>Date</TableColumn>
-                <TableColumn>Actions</TableColumn>
-              </TableHeader>
-              <TableBody>
-                {items.map((tx) => (
-                  <TableRow key={tx.id}>
-                    <TableCell>{tx.title}</TableCell>
-                    <TableCell>₹{tx.amount}</TableCell>
-                    <TableCell>{tx.type}</TableCell>
-                    <TableCell>{new Date(tx.date).toLocaleString()}</TableCell>
-                    <TableCell>
-                      <Button
-                        size="sm"
-                        className="mr-2"
-                        onClick={() => openForEdit(tx)}
-                      >
-                        Edit
-                      </Button>
-                      <Button
-                        size="sm"
-                        color="danger"
-                        variant="flat"
-                        onClick={() => handleDelete(tx.id)}
-                      >
-                        Delete
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          )}
-        </CardBody>
+      <Card className="bg-[#f0f8ff] dark:bg-[#1a1a1a]">
+        <CardHeader className="md:text-2xl">Transactions</CardHeader>
+
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <Table aria-label="Transactions table">
+            <TableHeader>
+              <TableColumn>Title</TableColumn>
+              <TableColumn>Amount</TableColumn>
+              <TableColumn>Type</TableColumn>
+              <TableColumn>Date</TableColumn>
+              <TableColumn>Actions</TableColumn>
+            </TableHeader>
+            <TableBody>
+              {items.map((tx) => (
+                <TableRow
+                  key={tx.id}
+                  className="hover:bg-[#f0f8ff] dark:hover:bg-[#42a4ff11]"
+                >
+                  <TableCell>{tx.title}</TableCell>
+                  <TableCell>₹{tx.amount}</TableCell>
+                  <TableCell>{tx.type}</TableCell>
+                  <TableCell>{new Date(tx.date).toLocaleString()}</TableCell>
+                  <TableCell>
+                    <Button
+                      size="sm"
+                      className="mr-2"
+                      onClick={() => openForEdit(tx)}
+                    >
+                      Edit
+                    </Button>
+                     <Button
+    size="sm"
+    className="mr-2"
+    color="secondary"
+    variant="flat"
+    onClick={() => openForRead(tx)}
+  >
+    Read
+  </Button>
+                    <Button
+                      size="sm"
+                      color="danger"
+                      variant="flat"
+                      onClick={() => handleDelete(tx.id)}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
       </Card>
 
       {/* Chart Section */}
-      <Card>
-        <CardHeader>Predictive Savings & Expenses</CardHeader>
+      <Card className="bg-[#f0f8ff] dark:bg-[#1a1a1a]">
+        <CardHeader className="md:text-2xl">
+          Predictive Savings & Expenses
+        </CardHeader>
         <CardBody>
           <ReactECharts option={chartOption} style={{ height: "400px" }} />
         </CardBody>
       </Card>
 
-
       {/* Pie Chart Section */}
-      <Card>
-        <CardHeader>Money Pie Chart Tracker</CardHeader>
+      <Card className="bg-[#f0f8ff] dark:bg-[#1a1a1a]">
+        <CardHeader className="md:text-2xl">Money Pie Chart Tracker</CardHeader>
         <CardBody>
           <ReactECharts
             option={{
@@ -343,59 +365,86 @@ const chartOption = {
       </Card>
 
 
+<Modal  isOpen={open}
+  onOpenChange={(isOpen) => {
+    setOpen(isOpen);
+    if (!isOpen) {
+      setReadOnly(false);
+      setEditing(null);
+    }
+  }}>
+  <ModalContent>
+    <ModalHeader>
+      {readOnly
+        ? "View Transaction"
+        : editing
+        ? "Edit Transaction"
+        : "New Transaction"}
+    </ModalHeader>
+    <ModalBody>
+      <Input
+        label="Title"
+        value={form.title}
+        isReadOnly={readOnly}
+        variant={readOnly ? "flat" : "bordered"}
+        onChange={(e) =>
+          setForm((f) => ({ ...f, title: e.target.value }))
+        }
+      />
+      <Input
+        label="Amount"
+        type="number"
+        value={form.amount.toString()}
+        isReadOnly={readOnly}
+        variant={readOnly ? "flat" : "bordered"}
+        onChange={(e) =>
+          setForm((f) => ({ ...f, amount: Number(e.target.value) }))
+        }
+      />
+      <Select
+        label="Type"
+        selectedKeys={[form.type]}
+        isDisabled={readOnly}
+        variant={readOnly ? "flat" : "bordered"}
+        onChange={(e) =>
+          setForm((f) => ({ ...f, type: e.target.value as any }))
+        }
+      >
+        <SelectItem key="income">Income</SelectItem>
+        <SelectItem key="expense">Expense</SelectItem>
+        <SelectItem key="transfer">Transfer</SelectItem>
+        <SelectItem key="investment">Investment</SelectItem>
+        <SelectItem key="loan">Loan</SelectItem>
+      </Select>
+      <Textarea
+        label="Notes"
+        value={form.notes}
+        isReadOnly={readOnly}
+        variant={readOnly ? "flat" : "bordered"}
+        onChange={(e) =>
+          setForm((f) => ({ ...f, notes: e.target.value }))
+        }
+      />
+    </ModalBody>
+    <ModalFooter>
+      <Button
+        variant="solid"
+        onClick={() => {
+          setOpen(false);
+        }}
+      >
+        {readOnly ? "Close" : "Cancel"}
+      </Button>
+      {!readOnly && (
+        <Button color="primary" onClick={submit}>
+          {editing ? "Save" : "Create"}
+        </Button>
+      )}
+    </ModalFooter>
+  </ModalContent>
+</Modal>
 
 
-      {/* Modal for Add/Edit */}
-      <Modal isOpen={open} onOpenChange={setOpen}>
-        <ModalContent>
-          <ModalHeader>{editing ? "Edit" : "Add"} Transaction</ModalHeader>
-          <ModalBody className="space-y-3">
-            <Input
-              label="Title"
-              value={form.title}
-              onChange={(e) =>
-                setForm((f) => ({ ...f, title: e.target.value }))
-              }
-            />
-            <Input
-              label="Amount"
-              type="number"
-              value={form.amount.toString()}
-              onChange={(e) =>
-                setForm((f) => ({ ...f, amount: Number(e.target.value) }))
-              }
-            />
-            <Select
-              label="Type"
-              selectedKeys={[form.type]}
-              onChange={(e) =>
-                setForm((f) => ({ ...f, type: e.target.value as any }))
-              }
-            >
-              <SelectItem key="expense">Expense</SelectItem>
-              <SelectItem key="income">Income</SelectItem>
-              <SelectItem key="transfer">Transfer</SelectItem>
-              <SelectItem key="investment">Investment</SelectItem>
-              <SelectItem key="loan">Loan</SelectItem>
-            </Select>
-            <Textarea
-              label="Notes"
-              value={form.notes}
-              onChange={(e) =>
-                setForm((f) => ({ ...f, notes: e.target.value }))
-              }
-            />
-          </ModalBody>
-          <ModalFooter>
-            <Button variant="light" onClick={() => setOpen(false)}>
-              Cancel
-            </Button>
-            <Button color="primary" onClick={submit}>
-              {editing ? "Save" : "Create"}
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
     </div>
   );
 }
