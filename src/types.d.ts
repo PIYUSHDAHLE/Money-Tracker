@@ -11,7 +11,7 @@ export type Transaction = {
   userId: string
   title: string
   amount: number
-  type: 'income' | 'expense'
+  type: 'income' | 'expense' | 'transfer' | 'investment' | 'loan'
   date: string
   notes?: string
 }

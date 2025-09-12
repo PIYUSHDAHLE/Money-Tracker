@@ -40,7 +40,7 @@ export default function Dashboard() {
   const items = useSelector((s: RootState) => s.transactions.items);
   const loading = useSelector((s: RootState) => s.transactions.loading);
   const dispatch = useAppDispatch();
-//   const isDark = document.documentElement.classList.contains("dark")
+
 const theme = useSelector((s: RootState) => s.theme.mode);
 const isDark = theme === "dark";
 
@@ -50,7 +50,7 @@ const isDark = theme === "dark";
   const [form, setForm] = useState<{
     title: string;
     amount: number;
-    type: "expense" | "income";
+    type: "expense" | "income" | "transfer" | "investment" | "loan";
     notes: string;
   }>({ title: "", amount: 0, type: "expense", notes: "" });
 
@@ -61,10 +61,13 @@ const isDark = theme === "dark";
   const totals = items.reduce(
     (acc, t) => {
       if (t.type === "income") acc.income += t.amount;
-      else acc.expense += t.amount;
+      else if (t.type === "expense") acc.expense += t.amount;
+      else if (t.type === "investment") acc.investment += t.amount;
+      else if (t.type === "loan") acc.loan += t.amount;
+      else if (t.type === "transfer") acc.transfer += t.amount;
       return acc;
     },
-    { income: 0, expense: 0 }
+    { income: 0, expense: 0, investment: 0, loan: 0, transfer: 0 }
   );
 
   function openForCreate() {
@@ -216,7 +219,25 @@ const chartOption = {
           </CardBody>
         </Card>
         <Card>
-          <CardHeader>Balance</CardHeader>
+          <CardHeader>Investment</CardHeader>
+          <CardBody>
+            <strong>₹{totals.investment}</strong>
+          </CardBody>
+        </Card>
+        <Card>
+          <CardHeader>Loan</CardHeader>
+          <CardBody>
+            <strong>₹{totals.loan}</strong>
+          </CardBody>
+        </Card>
+        <Card>
+          <CardHeader>Transfer</CardHeader>
+          <CardBody>
+            <strong>₹{totals.transfer}</strong>
+          </CardBody>
+        </Card>
+        <Card>
+          <CardHeader>Total Balance</CardHeader>
           <CardBody>
             <strong>₹{totals.income - totals.expense}</strong>
           </CardBody>
@@ -256,7 +277,7 @@ const chartOption = {
                       <Button
                         size="sm"
                         color="danger"
-                        variant="light"
+                        variant="flat"
                         onClick={() => handleDelete(tx.id)}
                       >
                         Delete
@@ -277,6 +298,52 @@ const chartOption = {
           <ReactECharts option={chartOption} style={{ height: "400px" }} />
         </CardBody>
       </Card>
+
+
+      {/* Pie Chart Section */}
+      <Card>
+        <CardHeader>Money Pie Chart Tracker</CardHeader>
+        <CardBody>
+          <ReactECharts
+            option={{
+              backgroundColor: isDark ? "#1a1a1a" : "#f0f8ff",
+              tooltip: {
+                trigger: "item",
+                formatter: "{b}: ₹{c} ({d}%)",
+              },
+              legend: {
+                orient: "vertical",
+                left: "left",
+                textStyle: { color: isDark ? "#fff" : "#000" },
+              },
+              series: [
+                {
+                  name: "Transactions",
+                  type: "pie",
+                  radius: "70%",
+                  data: [
+                    { value: totals.expense, name: "Expense" },
+                    { value: totals.income, name: "Income" },
+                    { value: totals.transfer, name: "Transfer" },
+                    { value: totals.investment, name: "Investment" },
+                    { value: totals.loan, name: "Loan" },
+                  ],
+                  label: {
+                    color: isDark ? "#fff" : "#000",
+                  },
+                  labelLine: {
+                    lineStyle: { color: isDark ? "#fff" : "#000" },
+                  },
+                },
+              ],
+            }}
+            style={{ height: "400px" }}
+          />
+        </CardBody>
+      </Card>
+
+
+
 
       {/* Modal for Add/Edit */}
       <Modal isOpen={open} onOpenChange={setOpen}>
@@ -307,6 +374,9 @@ const chartOption = {
             >
               <SelectItem key="expense">Expense</SelectItem>
               <SelectItem key="income">Income</SelectItem>
+              <SelectItem key="transfer">Transfer</SelectItem>
+              <SelectItem key="investment">Investment</SelectItem>
+              <SelectItem key="loan">Loan</SelectItem>
             </Select>
             <Textarea
               label="Notes"
