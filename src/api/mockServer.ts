@@ -45,6 +45,16 @@ export async function forgotPassword(email: string) {
   });
 }
 
+export async function resetPassword(email: string, newPassword: string) {
+  const users = readUsers();
+  const user = users.find((u) => u.email === email);
+  if (!user) throw new Error("User not found");
+  user.password = newPassword;    
+  writeUsers(users);               
+  return { id: user.id, email: user.email, name: user.name };
+}
+
+
 
 export async function createTransaction(tx: Omit<Transaction, 'id'>) {
   const all = readTx()

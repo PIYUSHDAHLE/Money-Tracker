@@ -28,14 +28,25 @@ export const forgotPasswordUser = createAsyncThunk(
   "auth/forgotPassword",
   async ({ email }: { email: string }, thunkAPI) => {
     try {
-      const res = await api.forgotPassword(email); // <-- implement in mockServer
-      return res.message; // e.g. "Password reset link sent"
+      const res = await api.forgotPassword(email);
+      return res.message;
     } catch (err: any) {
       return thunkAPI.rejectWithValue(err.message);
     }
   }
 );
 
+export const resetPasswordUser = createAsyncThunk(
+  "auth/resetPassword",
+  async ({ email, password }: { email: string; password: string }, thunkAPI) => {
+    try {
+      const res = await api.resetPassword(email, password);
+      return res;
+    } catch (err: any) {
+      return thunkAPI.rejectWithValue(err.message);
+    }
+  }
+);
 
 const slice = createSlice({
   name: "auth",
@@ -48,7 +59,6 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Register user cases
       .addCase(registerUser.pending, (s) => {
         s.loading = true;
         s.error = undefined;
@@ -62,7 +72,6 @@ const slice = createSlice({
         s.loading = false;
         s.error = a.payload as string;
       })
-      // Login user cases
       .addCase(loginUser.pending, (s) => {
         s.loading = true;
         s.error = undefined;
@@ -76,7 +85,6 @@ const slice = createSlice({
         s.loading = false;
         s.error = a.payload as string;
       })
-      // Forgot password cases
       .addCase(forgotPasswordUser.pending, (s) => {
         s.loading = true;
         s.error = undefined;
@@ -87,7 +95,18 @@ const slice = createSlice({
       .addCase(forgotPasswordUser.rejected, (s, a) => {
         s.loading = false;
         s.error = a.payload as string;
-      });
+      })
+      .addCase(resetPasswordUser.pending, (s) => {
+        s.loading = true;
+        s.error = undefined;
+      })
+      .addCase(resetPasswordUser.fulfilled, (s) => {
+        s.loading = false;
+      })
+      .addCase(resetPasswordUser.rejected, (s, a) => {
+        s.loading = false;
+        s.error = a.payload as string;
+      })
   },
 });
 

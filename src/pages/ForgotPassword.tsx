@@ -22,8 +22,8 @@ export default function ForgotPassword() {
     e.preventDefault();
     try {
       const res = await dispatch(forgotPasswordUser({ email })).unwrap();
-      setSuccessMsg(res); // from API
-      setTimeout(() => nav("/login"), 3000); // redirect after 3s
+      setSuccessMsg(res);
+      setTimeout(() => nav("/reset-password"), 3000); 
     } catch (err) {
       console.error("Forgot password failed:", err);
     }

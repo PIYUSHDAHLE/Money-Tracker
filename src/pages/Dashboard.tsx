@@ -249,8 +249,7 @@ function handleDelete(id: string) {
       {totals.income -
         (totals.expense +
           totals.investment +
-          totals.loan +
-          totals.transfer)}</strong>
+          totals.loan)}</strong>
           </CardBody>
         </Card>
       </div>
