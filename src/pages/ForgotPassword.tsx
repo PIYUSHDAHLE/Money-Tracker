@@ -40,19 +40,19 @@ export default function ForgotPassword() {
             <Input
               label="Email"
               type="email"
-              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {error && <p className="text-red-500 ml-2 text-sm">{error}</p>}
             {successMsg && (
-              <p className="text-green-500 text-sm">{successMsg}</p>
+              <p className="text-green-500 ml-2 text-sm">{successMsg}</p>
             )}
           </CardBody>
           <CardFooter className="flex justify-end">
             <Button
               type="submit"
+              fullWidth
               color="primary"
               variant="shadow"
               isLoading={loading}

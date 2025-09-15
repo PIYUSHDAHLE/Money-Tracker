@@ -101,7 +101,6 @@ export default function Register() {
           <CardBody className="space-y-4">
             <Input
               label="Name"
-              placeholder="Enter your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -109,22 +108,12 @@ export default function Register() {
             <Input
               label="Email"
               type="email"
-              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            {/* <Input
-              label="Password"
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              required
-            /> */}
             <Input
               label="Password"
-              placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -146,7 +135,7 @@ export default function Register() {
             />
           </CardBody>
           <CardFooter className="flex justify-end">
-            <Button type="submit" color="primary" variant="shadow">
+            <Button fullWidth type="submit" color="primary" variant="shadow">
               Register
             </Button>
           </CardFooter>

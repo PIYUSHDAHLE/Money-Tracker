@@ -71,14 +71,12 @@ export default function Login() {
             <Input
               label="Email"
               type="email"
-              placeholder="Enter your email"
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
             />
             <Input
               label="Password"
-              placeholder="Enter your password"
               value={password}
               onChange={e => setPassword(e.target.value)}
               required
@@ -107,7 +105,7 @@ export default function Login() {
   >
     Forgot Password?
   </button>
-  <Button type="submit" color="primary" variant="shadow">
+  <Button type="submit" fullWidth color="primary" variant="shadow">
     Login
   </Button>
 </CardFooter>
