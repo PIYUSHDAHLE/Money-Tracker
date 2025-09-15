@@ -84,7 +84,7 @@ export default function Login() {
     e.preventDefault();
     try {
       await dispatch(loginUser({ email, password })).unwrap();
-      nav("/");
+      nav("/dashboard");
     } catch (err) {
       alert("Login failed: " + (err as any));
     }
