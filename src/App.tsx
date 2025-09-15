@@ -9,6 +9,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useSelector } from "react-redux";
 import { RootState } from "./store";
+import ForgotPassword from './pages/ForgotPassword';
 
 export default function App() {
     const theme = useSelector((s: RootState) => s.theme.mode);
@@ -20,6 +21,7 @@ export default function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
         </Routes>
     </div>

@@ -99,9 +99,19 @@ export default function Login() {
               }
             />
           </CardBody>
-          <CardFooter className="flex justify-end">
-            <Button type="submit" color="primary" variant="shadow">Login</Button>
-          </CardFooter>
+     <CardFooter className="flex flex-col items-end space-y-2">
+  <button
+    type="button"
+    onClick={() => nav("/forgot-password")}
+    className="text-sm text-blue-600 ml-2 hover:underline self-start"
+  >
+    Forgot Password?
+  </button>
+  <Button type="submit" color="primary" variant="shadow">
+    Login
+  </Button>
+</CardFooter>
+
         </form>
       </Card>
     </div>

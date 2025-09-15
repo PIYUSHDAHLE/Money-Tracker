@@ -33,6 +33,19 @@ export async function login(email: string, password: string) {
   return { ...user, password: undefined }
 }
 
+export async function forgotPassword(email: string) {
+  return new Promise<{ message: string }>((resolve, reject) => {
+    setTimeout(() => {
+      if (email === "fail@test.com") {
+        reject(new Error("No account found with that email"));
+      } else {
+        resolve({ message: "Password reset link sent to your email" });
+      }
+    }, 1000);
+  });
+}
+
+
 export async function createTransaction(tx: Omit<Transaction, 'id'>) {
   const all = readTx()
   const newTx: Transaction = { ...tx, id: uuid() }
