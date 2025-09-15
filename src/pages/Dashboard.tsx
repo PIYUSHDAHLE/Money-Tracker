@@ -279,7 +279,7 @@ export default function Dashboard() {
                   <TableCell>₹{tx.amount}</TableCell>
                   <TableCell>{tx.type}</TableCell>
                   <TableCell>{new Date(tx.date).toLocaleString()}</TableCell>
-                  <TableCell className="space-x-2">
+                  <TableCell className="space-x-2 space-y-2">
                     <GlobalButton size="small" onClick={() => openForEdit(tx)}>
                       Edit
                     </GlobalButton>
@@ -306,7 +306,7 @@ export default function Dashboard() {
           Predictive Savings & Expenses
         </CardHeader>
         <CardBody>
-          <ReactECharts option={chartOption} style={{ height: "400px" }} />
+          <ReactECharts option={chartOption} style={{ height: "400px" }}/>
         </CardBody>
       </Card>
 
@@ -347,7 +347,7 @@ export default function Dashboard() {
                 },
               ],
             }}
-            style={{ height: "400px" }}
+           className="!h-[520px]"
           />
         </CardBody>
       </Card>
@@ -420,6 +420,8 @@ export default function Dashboard() {
               variant="solid"
               onClick={() => {
                 setOpen(false);
+                setReadOnly(false);
+                setEditing(null);
               }}
             >
               {readOnly ? "Close" : "Cancel"}
@@ -433,7 +435,6 @@ export default function Dashboard() {
         </ModalContent>
       </Modal>
 
-      {/* delete confirmation modal */}
       <Modal
         isOpen={deleteOpen}
         onOpenChange={(isOpen) => {
