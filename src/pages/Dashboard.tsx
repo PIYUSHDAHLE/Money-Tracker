@@ -205,44 +205,44 @@ function handleDelete(id: string) {
       <div className="flex justify-between items-center">
         <h1 className="text-2xl dark:text-white font-semibold">Dashboard</h1>
         <div className="flex space-x-2">
-          <Button color="primary" variant="shadow" onClick={openForCreate}>
+          <Button color="primary" variant="flat" onClick={openForCreate}>
             Add Transaction
           </Button>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className="bg-[#1ce42a57] dark:bg-[#1a1a1a]">
+        <Card className="bg-[#1ce42a57] dark:bg-[#1ce42925]">
           <CardHeader>Income</CardHeader>
           <CardBody>
             <strong>₹{totals.income}</strong>
           </CardBody>
         </Card>
-        <Card className="bg-[#e4131352] dark:bg-[#1a1a1a]">
+        <Card className="bg-[#e4131352] dark:bg-[#e413133f]">
           <CardHeader>Expense</CardHeader>
           <CardBody>
             <strong>₹{totals.expense}</strong>
           </CardBody>
         </Card>
-        <Card className="bg-[#1924b427] dark:bg-[#1a1a1a]">
+        <Card className="bg-[#1924b427] dark:bg-[#1c2ae636]">
           <CardHeader>Investment</CardHeader>
           <CardBody>
             <strong>₹{totals.investment}</strong>
           </CardBody>
         </Card>
-        <Card className="bg-[#e4c91b4f] dark:bg-[#1a1a1a]">
+        <Card className="bg-[#e4c91b4f] dark:bg-[#e4c91b3b]">
           <CardHeader>Loan</CardHeader>
           <CardBody>
             <strong>₹{totals.loan}</strong>
           </CardBody>
         </Card>
-        <Card className="bg-[#7214dd48] dark:bg-[#1a1a1a]">
+        <Card className="bg-[#7214dd48] dark:bg-[#7214dd31]">
           <CardHeader>Transfer</CardHeader>
           <CardBody>
             <strong>₹{totals.transfer}</strong>
           </CardBody>
         </Card>
-        <Card className="bg-[#db29e746] dark:bg-[#1a1a1a]">
+        <Card className="bg-[#db29e746] dark:bg-[#da29e734]">
           <CardHeader>Total Balance</CardHeader>
           <CardBody>
             <strong> ₹
@@ -437,7 +437,7 @@ function handleDelete(id: string) {
         {readOnly ? "Close" : "Cancel"}
       </Button>
       {!readOnly && (
-        <Button color="primary" onClick={submit}>
+        <Button color="primary" variant="flat" onClick={submit}>
           {editing ? "Save" : "Create"}
         </Button>
       )}
@@ -464,6 +464,7 @@ function handleDelete(id: string) {
       </Button>
       <Button
         color="danger"
+        variant="flat"
         onClick={async () => {
           if (!deleteId) return;
           try {
