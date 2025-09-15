@@ -4,13 +4,13 @@ import { useAppDispatch } from "../hooks";
 import { resetPasswordUser } from "../store/authSlice";
 import {
   Input,
-  Button,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
 } from "@heroui/react";
 import { EyeFilledIcon, EyeSlashFilledIcon } from "./Login"; // ✅ reuse icons
+import GlobalButton from "@/components/common/GlobalButton";
 
 export default function ResetPassword() {
   const [params] = useSearchParams();
@@ -105,18 +105,10 @@ export default function ResetPassword() {
             />
           </CardBody>
           <CardFooter className="flex flex-col space-y-2">
-            <Button type="submit" color="primary" variant="shadow" fullWidth>
-              Update Password
-            </Button>
-            <Button
-              type="button"
-              variant="light"
-              className="text-blue-600"
-              onClick={() => nav("/login")}
-              fullWidth
-            >
+            <GlobalButton type="submit" className="w-full">Update Password</GlobalButton>
+            <GlobalButton type="button" variant="light" className="w-full text-[#00a2ff]" onClick={() => nav("/login")}>
               Back to Login
-            </Button>
+            </GlobalButton>
           </CardFooter>
         </form>
       </Card>

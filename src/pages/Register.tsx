@@ -4,12 +4,12 @@ import { registerUser } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
 import {
   Input,
-  Button,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
 } from "@heroui/react";
+import GlobalButton from "@/components/common/GlobalButton";
 
 export const EyeSlashFilledIcon = (props: any) => {
   return (
@@ -135,9 +135,9 @@ export default function Register() {
             />
           </CardBody>
           <CardFooter className="flex justify-end">
-            <Button fullWidth type="submit" color="primary" variant="shadow">
+              <GlobalButton type="submit" className="w-full">
               Register
-            </Button>
+            </GlobalButton>
           </CardFooter>
         </form>
       </Card>

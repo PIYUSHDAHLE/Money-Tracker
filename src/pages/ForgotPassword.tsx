@@ -2,14 +2,8 @@ import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { forgotPasswordUser } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
-import {
-  Input,
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-} from "@heroui/react";
+import { Input, Card, CardHeader, CardBody, CardFooter } from "@heroui/react";
+import GlobalButton from "@/components/common/GlobalButton";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -23,7 +17,7 @@ export default function ForgotPassword() {
     try {
       const res = await dispatch(forgotPasswordUser({ email })).unwrap();
       setSuccessMsg(res);
-      setTimeout(() => nav("/reset-password"), 3000); 
+      setTimeout(() => nav("/reset-password"), 3000);
     } catch (err) {
       console.error("Forgot password failed:", err);
     }
@@ -50,15 +44,9 @@ export default function ForgotPassword() {
             )}
           </CardBody>
           <CardFooter className="flex justify-end">
-            <Button
-              type="submit"
-              fullWidth
-              color="primary"
-              variant="shadow"
-              isLoading={loading}
-            >
+            <GlobalButton type="submit" className="w-full" isLoading={loading}>
               Send
-            </Button>
+            </GlobalButton>
           </CardFooter>
         </form>
       </Card>

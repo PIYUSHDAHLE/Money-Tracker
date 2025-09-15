@@ -34,6 +34,7 @@ import {
   Textarea,
 } from "@heroui/react";
 import ReactECharts from "echarts-for-react";
+import GlobalButton from "@/components/common/GlobalButton";
 
 export default function Dashboard() {
   const user = useSelector((s: RootState) => s.auth.user);
@@ -46,11 +47,11 @@ export default function Dashboard() {
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<any>(null);
   const [deleteOpen, setDeleteOpen] = useState(false);
-const [deleteId, setDeleteId] = useState<string | null>(null);
-function handleDelete(id: string) {
-  setDeleteId(id);
-  setDeleteOpen(true);
-}
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+  function handleDelete(id: string) {
+    setDeleteId(id);
+    setDeleteOpen(true);
+  }
 
   const [form, setForm] = useState<{
     title: string;
@@ -63,7 +64,7 @@ function handleDelete(id: string) {
     if (user) dispatch(fetchUserTx(user.id));
   }, [user]);
 
-    function openForRead(tx: any) {
+  function openForRead(tx: any) {
     setEditing(tx);
     setForm({
       title: tx.title,
@@ -205,9 +206,7 @@ function handleDelete(id: string) {
       <div className="flex justify-between items-center">
         <h1 className="text-2xl dark:text-white font-semibold">Dashboard</h1>
         <div className="flex space-x-2">
-          <Button color="primary" variant="flat" onClick={openForCreate}>
-            Add Transaction
-          </Button>
+          <GlobalButton onClick={openForCreate}>Add Transaction</GlobalButton>
         </div>
       </div>
 
@@ -245,11 +244,12 @@ function handleDelete(id: string) {
         <Card className="bg-[#db29e746] dark:bg-[#da29e734]">
           <CardHeader>Total Balance</CardHeader>
           <CardBody>
-            <strong> ₹
-      {totals.income -
-        (totals.expense +
-          totals.investment +
-          totals.loan)}</strong>
+            <strong>
+              {" "}
+              ₹
+              {totals.income -
+                (totals.expense + totals.investment + totals.loan)}
+            </strong>
           </CardBody>
         </Card>
       </div>
@@ -279,31 +279,19 @@ function handleDelete(id: string) {
                   <TableCell>₹{tx.amount}</TableCell>
                   <TableCell>{tx.type}</TableCell>
                   <TableCell>{new Date(tx.date).toLocaleString()}</TableCell>
-                  <TableCell>
-                    <Button
-                      size="sm"
-                      className="mr-2"
-                      onClick={() => openForEdit(tx)}
-                    >
+                  <TableCell className="space-x-2">
+                    <GlobalButton size="small" onClick={() => openForEdit(tx)}>
                       Edit
-                    </Button>
-                     <Button
-    size="sm"
-    className="mr-2"
-    color="secondary"
-    variant="flat"
-    onClick={() => openForRead(tx)}
-  >
-    Read
-  </Button>
-                    <Button
-                      size="sm"
-                      color="danger"
-                      variant="flat"
+                    </GlobalButton>
+                    <GlobalButton size="small" onClick={() => openForRead(tx)}>
+                      Read
+                    </GlobalButton>
+                    <GlobalButton
+                      size="small"
                       onClick={() => handleDelete(tx.id)}
                     >
                       Delete
-                    </Button>
+                    </GlobalButton>
                   </TableCell>
                 </TableRow>
               ))}
@@ -364,126 +352,125 @@ function handleDelete(id: string) {
         </CardBody>
       </Card>
 
-
-<Modal  isOpen={open}
-  onOpenChange={(isOpen) => {
-    setOpen(isOpen);
-    if (!isOpen) {
-      setReadOnly(false);
-      setEditing(null);
-    }
-  }}>
-  <ModalContent>
-    <ModalHeader>
-      {readOnly
-        ? "View Transaction"
-        : editing
-        ? "Edit Transaction"
-        : "New Transaction"}
-    </ModalHeader>
-    <ModalBody>
-      <Input
-        label="Title"
-        value={form.title}
-        isReadOnly={readOnly}
-        variant={readOnly ? "flat" : "bordered"}
-        onChange={(e) =>
-          setForm((f) => ({ ...f, title: e.target.value }))
-        }
-      />
-      <Input
-        label="Amount"
-        type="number"
-        value={form.amount.toString()}
-        isReadOnly={readOnly}
-        variant={readOnly ? "flat" : "bordered"}
-        onChange={(e) =>
-          setForm((f) => ({ ...f, amount: Number(e.target.value) }))
-        }
-      />
-      <Select
-        label="Type"
-        selectedKeys={[form.type]}
-        isDisabled={readOnly}
-        variant={readOnly ? "flat" : "bordered"}
-        onChange={(e) =>
-          setForm((f) => ({ ...f, type: e.target.value as any }))
-        }
-      >
-        <SelectItem key="income">Income</SelectItem>
-        <SelectItem key="expense">Expense</SelectItem>
-        <SelectItem key="transfer">Transfer</SelectItem>
-        <SelectItem key="investment">Investment</SelectItem>
-        <SelectItem key="loan">Loan</SelectItem>
-      </Select>
-      <Textarea
-        label="Notes"
-        value={form.notes}
-        isReadOnly={readOnly}
-        variant={readOnly ? "flat" : "bordered"}
-        onChange={(e) =>
-          setForm((f) => ({ ...f, notes: e.target.value }))
-        }
-      />
-    </ModalBody>
-    <ModalFooter>
-      <Button
-        variant="solid"
-        onClick={() => {
-          setOpen(false);
-        }}
-      >
-        {readOnly ? "Close" : "Cancel"}
-      </Button>
-      {!readOnly && (
-        <Button color="primary" variant="flat" onClick={submit}>
-          {editing ? "Save" : "Create"}
-        </Button>
-      )}
-    </ModalFooter>
-  </ModalContent>
-</Modal>
-
-{/* delete confirmation modal */}
-<Modal
-  isOpen={deleteOpen}
-  onOpenChange={(isOpen) => {
-    setDeleteOpen(isOpen);
-    if (!isOpen) setDeleteId(null);
-  }}
->
-  <ModalContent>
-    <ModalHeader>Confirm Delete</ModalHeader>
-    <ModalBody>
-      Are you sure you want to delete this transaction?
-    </ModalBody>
-    <ModalFooter>
-      <Button variant="solid" onClick={() => setDeleteOpen(false)}>
-        Cancel
-      </Button>
-      <Button
-        color="danger"
-        variant="flat"
-        onClick={async () => {
-          if (!deleteId) return;
-          try {
-            dispatch(optimisticRemove(deleteId));
-            await dispatch(removeTx(deleteId)).unwrap();
-          } catch (err) {
-            alert("Delete failed");
-            if (user) dispatch(fetchUserTx(user.id));
+      <Modal
+        isOpen={open}
+        onOpenChange={(isOpen) => {
+          setOpen(isOpen);
+          if (!isOpen) {
+            setReadOnly(false);
+            setEditing(null);
           }
-          setDeleteOpen(false);
-          setDeleteId(null);
         }}
       >
-        Delete
-      </Button>
-    </ModalFooter>
-  </ModalContent>
-</Modal>
+        <ModalContent>
+          <ModalHeader>
+            {readOnly
+              ? "View Transaction"
+              : editing
+                ? "Edit Transaction"
+                : "New Transaction"}
+          </ModalHeader>
+          <ModalBody>
+            <Input
+              label="Title"
+              value={form.title}
+              isReadOnly={readOnly}
+              variant={readOnly ? "flat" : "bordered"}
+              onChange={(e) =>
+                setForm((f) => ({ ...f, title: e.target.value }))
+              }
+            />
+            <Input
+              label="Amount"
+              type="number"
+              value={form.amount.toString()}
+              isReadOnly={readOnly}
+              variant={readOnly ? "flat" : "bordered"}
+              onChange={(e) =>
+                setForm((f) => ({ ...f, amount: Number(e.target.value) }))
+              }
+            />
+            <Select
+              label="Type"
+              selectedKeys={[form.type]}
+              isDisabled={readOnly}
+              variant={readOnly ? "flat" : "bordered"}
+              onChange={(e) =>
+                setForm((f) => ({ ...f, type: e.target.value as any }))
+              }
+            >
+              <SelectItem key="income">Income</SelectItem>
+              <SelectItem key="expense">Expense</SelectItem>
+              <SelectItem key="transfer">Transfer</SelectItem>
+              <SelectItem key="investment">Investment</SelectItem>
+              <SelectItem key="loan">Loan</SelectItem>
+            </Select>
+            <Textarea
+              label="Notes"
+              value={form.notes}
+              isReadOnly={readOnly}
+              variant={readOnly ? "flat" : "bordered"}
+              onChange={(e) =>
+                setForm((f) => ({ ...f, notes: e.target.value }))
+              }
+            />
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              variant="solid"
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
+              {readOnly ? "Close" : "Cancel"}
+            </Button>
+            {!readOnly && (
+              <Button color="primary" variant="flat" onClick={submit}>
+                {editing ? "Save" : "Create"}
+              </Button>
+            )}
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
 
-
+      {/* delete confirmation modal */}
+      <Modal
+        isOpen={deleteOpen}
+        onOpenChange={(isOpen) => {
+          setDeleteOpen(isOpen);
+          if (!isOpen) setDeleteId(null);
+        }}
+      >
+        <ModalContent>
+          <ModalHeader>Confirm Delete</ModalHeader>
+          <ModalBody>
+            Are you sure you want to delete this transaction?
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="solid" onClick={() => setDeleteOpen(false)}>
+              Cancel
+            </Button>
+            <Button
+              color="danger"
+              variant="flat"
+              onClick={async () => {
+                if (!deleteId) return;
+                try {
+                  dispatch(optimisticRemove(deleteId));
+                  await dispatch(removeTx(deleteId)).unwrap();
+                } catch (err) {
+                  alert("Delete failed");
+                  if (user) dispatch(fetchUserTx(user.id));
+                }
+                setDeleteOpen(false);
+                setDeleteId(null);
+              }}
+            >
+              Delete
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 }

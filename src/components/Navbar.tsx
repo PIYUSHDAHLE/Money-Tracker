@@ -4,6 +4,7 @@ import { RootState } from "../store";
 import { logout } from "../store/authSlice";
 import { toggleTheme } from "../store/themeSlice";
 import { Moon, Sun } from "lucide-react";
+import GlobalButton from "./common/GlobalButton";
 
 export default function Navbar() {
   const user = useSelector((s: RootState) => s.auth.user);
@@ -25,7 +26,7 @@ export default function Navbar() {
             className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800"
           >
             {theme === "light" ? (
-              <Moon className="w-5 h-5 text-primary" />
+              <Moon className="w-5 h-5 text-blue-600" />
             ) : (
               <Sun className="w-5 h-5 text-yellow-400" />
             )}
@@ -36,30 +37,31 @@ export default function Navbar() {
               <span className="text-sm dark:text-[#00a2ff]">
                 Hi, {user.name}
               </span>
-              <button
-                className="px-3 py-1 rounded bg-primary text-white hover:opacity-90"
+              <GlobalButton
                 onClick={() => {
                   dispatch(logout());
                   nav("/login");
                 }}
               >
                 Logout
-              </button>
+              </GlobalButton>
             </>
           ) : (
             <>
-              <Link
-                to="/login"
-                className="px-3 py-1 rounded bg-primary text-white hover:opacity-90"
+        <GlobalButton
+                onClick={() => {
+                  nav("/login");
+                }}
               >
                 Login
-              </Link>
-              <Link
-                to="/register"
-                className="px-3 py-1 rounded border border-primary text-primary hover:bg-primary hover:text-white"
+              </GlobalButton>
+              <GlobalButton
+                onClick={() => {
+                  nav("/register");
+                }}
               >
                 Register
-              </Link>
+              </GlobalButton>
             </>
           )}
         </div>
