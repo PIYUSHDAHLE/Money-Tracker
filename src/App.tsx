@@ -12,6 +12,7 @@ import { RootState } from "./store";
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import SupportCenter from './pages/SupportCenter';
+import HomePage from './pages/HomePage';
 
 export default function App() {
     const theme = useSelector((s: RootState) => s.theme.mode);
@@ -21,6 +22,7 @@ export default function App() {
      <div className={theme === "light" ? "light min-h-screen" : "dark min-h-screen"}>
              <Navbar />
         <Routes>
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />

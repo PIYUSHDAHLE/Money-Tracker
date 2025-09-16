@@ -5,6 +5,7 @@ import { logout } from "../store/authSlice";
 import { toggleTheme } from "../store/themeSlice";
 import { Moon, Sun } from "lucide-react";
 import GlobalButton from "./common/GlobalButton";
+import logoImage from '/images/money-tracker-by-piyush-dahle-logo-image.png' 
 import {
   ChevronDown,
   LogOut,
@@ -25,8 +26,13 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-white/60 dark:bg-black shadow-lg border-b border-gray-200 dark:border-gray-700">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <Link to="/" className="font-bold text-lg text-primary">
-          Money Tracker
+        <Link to="/" className="font-bold text-lg text-primary flex items-center justify-center gap-2">
+          <img
+        src={logoImage}
+        className="h-14 w-14 mx-auto  rounded-full border-2 border-blue-400 shadow-lg"
+        alt="Logo"
+      />
+      <h2 className="text-lg font-bold">Money Tracker</h2>
         </Link>
 
         <div className="flex items-center space-x-4">
