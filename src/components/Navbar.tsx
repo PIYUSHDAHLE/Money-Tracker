@@ -29,10 +29,10 @@ export default function Navbar() {
         <Link to="/" className="font-bold text-lg text-primary flex items-center justify-center gap-2">
           <img
         src={logoImage}
-        className="h-14 w-14 mx-auto  rounded-full border-2 border-blue-400 shadow-lg"
+        className="h-14 w-14 mx-auto rounded-full border-2 border-blue-400 shadow-lg"
         alt="Logo"
       />
-      <h2 className="text-lg font-bold">Money Tracker</h2>
+      <h2 className="text-lg text-blue-700 dark:text-blue-400 font-bold">Money Tracker</h2>
         </Link>
 
         <div className="flex items-center space-x-4">

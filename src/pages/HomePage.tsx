@@ -104,7 +104,6 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
-      {/* Section 1: Hero */}
       <section
         className="hero-section relative h-screen flex items-center justify-center text-center text-gray-900 dark:text-white overflow-hidden"
         style={{
@@ -144,7 +143,6 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Section 2: Swiper Cards */}
       <section className="swiper-section py-20 lg:py-20 bg-gradient-to-b from-blue-50 to-white dark:from-black dark:to-gray-900 relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <h2 className="text-4xl font-extrabold text-center mb-12 text-blue-700 dark:text-blue-400">
@@ -211,7 +209,6 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Section 3: How Money Tracker Works */}
       <section className="how-works-section py-20 lg:py-30 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white dark:bg-black relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
           <div className="how-works-left">
@@ -256,7 +253,6 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Section 4: Benefits */}
       <section className="benefits-section py-20 bg-gradient-to-b from-blue-50 to-white dark:from-black dark:to-gray-900 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
           <h2 className="text-4xl font-extrabold mb-6 text-blue-700 dark:text-blue-400">
