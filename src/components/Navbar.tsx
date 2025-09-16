@@ -43,9 +43,12 @@ export default function Navbar() {
 
           {user ? (
             <>
-              <div className="relative inline-block text-left"   onMouseEnter={() => setOpen(true)}
-  onMouseLeave={() => setOpen(false)}>
-          <div className="py-[2px]"></div>
+              <div
+                className="relative inline-block text-left"
+                onMouseEnter={() => setOpen(true)}
+                onMouseLeave={() => setOpen(false)}
+              >
+                <div className="py-[2px]"></div>
                 <button
                   onClick={() => setOpen(!open)}
                   className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-[#00142B] transition cursor-pointer"
@@ -64,49 +67,54 @@ export default function Navbar() {
                     }`}
                   />
                 </button>
-                    <div className="py-[2px]"></div>
+                <div className="py-[2px]"></div>
                 {open && (
                   <>
-                  <div className="absolute  right-0 w-64 bg-blue-100 border border-none rounded-lg shadow-lg z-50 dark:bg-[#00142B] overflow-hidden">
-                    <ul className="">
-                      <li>
+                    <div className="absolute  right-0 w-64 bg-blue-100 border border-none rounded-lg shadow-lg z-50 dark:bg-[#00142B] overflow-hidden">
+                      <ul className="">
+                        <li>
+                          <button
+                            className="flex px-4 py-2 items-center hover:bg-blue-200 space-x-2 cursor-pointer hover:text-blue-600 w-full"
+                            onClick={() => {
+                              nav("/dashboard");
+                            }}
+                          >
+                            <Layers className="w-4 h-4" />
+                            <span>Dashboard</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button className="flex px-4 py-2 items-center hover:bg-blue-200 space-x-2 cursor-pointer hover:text-blue-600 w-full">
+                            <Settings className="w-4 h-4" />
+                            <span>Account Settings</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            className="flex px-4 py-2 items-center hover:bg-blue-200 space-x-2 cursor-pointer hover:text-blue-600 w-full"
+                            onClick={() => {
+                              nav("/support");
+                            }}
+                          >
+                            <HelpCircle className="w-4 h-4" />
+                            <span>Support Center</span>
+                          </button>
+                        </li>
+                      </ul>
+                      <div className="border-t border-gray-300 dark:border-gray-700 ">
                         <button
-                          className="flex px-4 py-2 items-center hover:bg-blue-200 space-x-2 cursor-pointer hover:text-blue-600 w-full"
+                          className="w-full flex items-center space-x-2 px-[18px] py-2 hover:text-red-600 hover:bg-red-50 rounded-b-lg"
                           onClick={() => {
-                            nav("/dashboard");
+                            dispatch(logout());
+                            nav("/login");
                           }}
                         >
-                          <Layers className="w-4 h-4" />
-                          <span>Dashboard</span>
+                          <LogOut className="w-4 h-4" />
+                          <span>Log Out</span>
                         </button>
-                      </li>
-                      <li>
-                        <button className="flex px-4 py-2 items-center hover:bg-blue-200 space-x-2 cursor-pointer hover:text-blue-600 w-full">
-                          <Settings className="w-4 h-4" />
-                          <span>Account Settings</span>
-                        </button>
-                      </li>
-                      <li>
-                        <button className="flex px-4 py-2 items-center hover:bg-blue-200 space-x-2 cursor-pointer hover:text-blue-600 w-full">
-                          <HelpCircle className="w-4 h-4" />
-                          <span>Support Center</span>
-                        </button>
-                      </li>
-                    </ul>
-                    <div className="border-t border-gray-200 dark:border-gray-700 ">
-                      <button
-                        className="w-full flex items-center space-x-2 px-[18px] py-2 hover:text-red-600 hover:bg-red-50 rounded-b-lg"
-                        onClick={() => {
-                          dispatch(logout());
-                          nav("/login");
-                        }}
-                      >
-                        <LogOut className="w-4 h-4" />
-                        <span>Log Out</span>
-                      </button>
+                      </div>
                     </div>
-                  </div>
-                    </>
+                  </>
                 )}
               </div>
             </>

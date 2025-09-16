@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "./store";
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import SupportCenter from './pages/SupportCenter';
 
 export default function App() {
     const theme = useSelector((s: RootState) => s.theme.mode);
@@ -24,7 +25,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          {/* <Route path="" element={< />} /> */}
+          <Route path="/support" element={<SupportCenter />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
         </Routes>
     </div>
