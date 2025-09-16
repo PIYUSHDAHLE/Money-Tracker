@@ -145,7 +145,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Section 2: Swiper Cards */}
-      <section className="swiper-section py-20 lg:py-35 bg-gradient-to-b from-blue-50 to-white dark:from-black dark:to-gray-900 relative overflow-hidden">
+      <section className="swiper-section py-20 lg:py-20 bg-gradient-to-b from-blue-50 to-white dark:from-black dark:to-gray-900 relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <h2 className="text-4xl font-extrabold text-center mb-12 text-blue-700 dark:text-blue-400">
             What You Can Do
@@ -197,8 +197,8 @@ const HomePage: React.FC = () => {
             ].map((card, i) => (
               <SwiperSlide key={i} className="swiper-slide py-10">
                 <div className="p-6 bg-white dark:bg-black rounded-xl border border-blue-200 dark:border-blue-900 shadow-lg">
-                  <div className="">
-                    <img src={card.icon} alt={card.title} className="w-full h-70 rounded-2xl" />
+                  <div className="mb-2">
+                    <img src={card.icon} alt={card.title} className="w-full rounded-2xl object-cover" />
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-blue-700 dark:text-blue-400">
                     {card.title}
@@ -238,7 +238,7 @@ const HomePage: React.FC = () => {
             </div>
           </div>
 
-          <div className="how-works-right grid grid-cols-2 gap-4">
+          <div className="flex justify-center items-center gap-4 flex-wrap">
             {[
               "https://towardsdatascience.com/wp-content/uploads/2025/06/dashboard.png",
               "https://agencyanalytics.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fdfcvkz6j859j%2F473RYZBe7hSHzxTWNGH4Dk%2F818e3d7833e56e2363e39849a3fb8774%2FSTREAM-goals-alternative-to-SMART-goals.png&w=1080&q=75",
@@ -249,9 +249,7 @@ const HomePage: React.FC = () => {
                 key={i}
                 src={src}
                 alt={`Work ${i}`}
-                width={400}
-                height={200}
-                className="h-44 w-full object-cover rounded-xl shadow-lg"
+                className="w-150 md:w-60 md:h-44 object-cover rounded-xl shadow-lg"
               />
             ))}
           </div>
