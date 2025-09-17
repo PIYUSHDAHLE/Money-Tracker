@@ -276,7 +276,7 @@ useEffect(() => {
             </div>
             {block.align === "left" ? (
               <>
-                <div className="hidden md:block p-4">
+                <div className="hidden md:block p-15">
                   <img
                     src={block.img}
                     className="vision-img rounded-xl shadow-lg"
@@ -302,7 +302,7 @@ useEffect(() => {
                     {block.text}
                   </p>
                 </div>
-                <div className="hidden md:block p-4">
+                <div className="hidden md:block p-15">
                   <img
                     src={block.img}
                     className="vision-img rounded-xl shadow-lg"
