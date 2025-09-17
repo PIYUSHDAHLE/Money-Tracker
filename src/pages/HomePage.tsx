@@ -82,10 +82,11 @@ const HomePage: React.FC = () => {
       );
 
     const benefitsTl = gsap.timeline({
+      delay: 1,
       scrollTrigger: {
         trigger: ".benefits-section",
         start: "top 75%",
-        toggleActions: "play reverse play reverse",
+        toggleActions: "play reverse play reverse",  
       },
     });
     benefitsTl.fromTo(
@@ -96,7 +97,7 @@ const HomePage: React.FC = () => {
         opacity: 1,
         rotate: 0,
         duration: 1,
-        stagger: 0.2,
+        stagger: 0.3,
         ease: "back.out(1.7)",
       }
     );
