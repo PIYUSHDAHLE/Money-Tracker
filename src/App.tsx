@@ -16,6 +16,7 @@ import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
 import AboutUs from "./pages/AboutUs";
 import ScrollToTop from "./components/ScrollToTop";
+import ContactUs from "./pages/ContactUs";
 
 export default function App() {
   const theme = useSelector((s: RootState) => s.theme.mode);
@@ -32,6 +33,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<ContactUs />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />

@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="bg-[#051320] dark:bg-black text-white py-10 mt-20 relative overflow-hidden"
+      className="bg-[#051320] dark:bg-black text-white py-10 relative overflow-hidden"
     >
       {/* Animated Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-blue-600/10 animate-pulse"></div>
