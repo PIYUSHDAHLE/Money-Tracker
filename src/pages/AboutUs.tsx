@@ -200,7 +200,7 @@ useEffect(() => {
       className="bg-white dark:bg-black text-gray-900 dark:text-white"
     >
       {/* Section 1 - Hero */}
-      <section className="hero-section h-screen flex flex-col items-center justify-center text-center bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 dark:from-gray-800 dark:via-gray-900 dark:to-gray-950 animate-gradient-xy opacity-40 dark:opacity-100">
+      <section className="hero-section h-screen flex flex-col items-center justify-center text-center bg-gradient-to-r from-[#1e88e5] via-[#42a5f5] to-[#90caf9] dark:from-black dark:via-gray-900 dark:to-gray-800 animate-gradient-xy ">
         <h1 className="hero-text text-5xl md:text-9xl font-extrabold space-x-2 overflow-hidden">
           <span className="inline-block text-[#ffffff]">A</span>
           <span className="inline-block text-[#ffffff]">b</span>

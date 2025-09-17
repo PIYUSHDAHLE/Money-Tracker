@@ -19,31 +19,20 @@ export default function ContactUs() {
   const infoRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // --- guard for SSR ---
     if (typeof window === "undefined") return;
-
-    // --- create Lenis instance (no unsupported/old props) ---
-    const lenis = new Lenis(); // use default smoothing options
-
-    // expose for debugging if needed
+    const lenis = new Lenis(); 
     (window as any).lenis = lenis;
-
-    // --- make ScrollTrigger aware of Lenis (scrollerProxy) ---
-    // pick a stable scroller element
     const scroller = (document.scrollingElement ||
       document.documentElement) as Element;
 
     ScrollTrigger.scrollerProxy(scroller, {
       scrollTop(value?: number) {
         if (arguments.length) {
-          // when ScrollTrigger wants to set scroll position, delegate to Lenis
           lenis.scrollTo(value as number);
         }
-        // when ScrollTrigger wants to read scroll, read from window
         return window.scrollY || document.documentElement.scrollTop;
       },
       getBoundingClientRect() {
-        // required by ScrollTrigger to calculate sizes — return viewport rect
         return {
           top: 0,
           left: 0,
@@ -51,30 +40,20 @@ export default function ContactUs() {
           height: window.innerHeight,
         } as DOMRect;
       },
-      // pinType helps ScrollTrigger decide how to "pin" elements
       pinType: (scroller as HTMLElement).style?.transform ? "transform" : "fixed",
     });
-
-    // ensure ScrollTrigger updates when Lenis emits a scroll event
     lenis.on("scroll", () => {
       ScrollTrigger.update();
     });
-
-    // RAF loop to drive Lenis
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
-
-    // --- GSAP animations for each section (scroller: scroller) ---
-    // Use context so cleanup is safe
     const ctx = gsap.context(() => {
       const sections = [heroRef.current, formRef.current, infoRef.current];
-
       sections.forEach((section) => {
         if (!section) return;
-
         gsap.from(section.querySelectorAll(".animate-el"), {
           y: 80,
           opacity: 0,
@@ -83,23 +62,18 @@ export default function ContactUs() {
           ease: "power4.out",
           scrollTrigger: {
             trigger: section,
-            scroller, // important: tell ScrollTrigger to use our proxied scroller
+            scroller, 
             start: "top 80%",
             end: "bottom 40%",
             toggleActions: "play none none reverse",
-            // markers: true // <-- uncomment for debugging
           },
         });
       });
     });
-
-    // refresh to ensure ScrollTrigger reads correct sizes
     ScrollTrigger.refresh();
-
-    // --- cleanup on unmount ---
     return () => {
       try {
-        ctx.revert(); // removes GSAP animations created in context
+        ctx.revert(); 
       } catch {}
       try {
         lenis.destroy();

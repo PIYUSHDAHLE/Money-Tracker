@@ -91,7 +91,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50 dark:bg-black">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-[#1e88e5] via-[#42a5f5] to-[#90caf9] dark:from-black dark:via-gray-900 dark:to-gray-800">
       <Card className="w-full max-w-md p-4">
         <CardHeader className="flex justify-center">
           <h2 className="text-2xl font-semibold">Login</h2>
