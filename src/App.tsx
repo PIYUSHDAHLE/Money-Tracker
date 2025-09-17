@@ -13,6 +13,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import SupportCenter from './pages/SupportCenter';
 import HomePage from './pages/HomePage';
+import Footer from './components/Footer';
 
 export default function App() {
     const theme = useSelector((s: RootState) => s.theme.mode);
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/support" element={<SupportCenter />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
         </Routes>
+        <Footer />
     </div>
   );
 }
