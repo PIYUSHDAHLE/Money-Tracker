@@ -23,24 +23,24 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2 flex gap-3 text-gray-300">
               <li>
-                <a href="#" className="hover:text-blue-400 hover:underline transition-colors">
+                <Link to="/" className="hover:text-blue-400 hover:underline transition-colors">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-400 hover:underline transition-colors">
+                <Link to="/about" className="hover:text-blue-400 hover:underline transition-colors">
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-400 hover:underline transition-colors">
+                <Link to="/contact" className="hover:text-blue-400 hover:underline transition-colors">
                   Contact Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-400 hover:underline transition-colors">
+                <Link to="/support" className="hover:text-blue-400 hover:underline transition-colors">
                   Support
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

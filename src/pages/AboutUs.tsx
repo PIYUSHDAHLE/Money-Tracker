@@ -52,8 +52,8 @@ useEffect(() => {
       gsap.from(".who-image", {
         scrollTrigger: {
           trigger: ".who-section",
-          start: "top 80%",
-          end: "bottom 70%",
+          start: "top 55%",
+          end: "bottom 100%",
           scrub: true,
         },
         y: 100,
@@ -65,7 +65,7 @@ useEffect(() => {
       gsap.from(".who-text", {
         scrollTrigger: {
           trigger: ".who-section",
-          start: "top 75%",
+          start: "top 55%",
         },
         x: -100,
         opacity: 0,
@@ -102,10 +102,11 @@ useEffect(() => {
         const img = el.querySelector(".vision-img");
         const content = el.querySelector(".vision-content");
 
+        if (img) {
         gsap.from(img, {
           scrollTrigger: {
             trigger: el,
-            start: "top 80%",
+            start: "top 75%",
             toggleActions: "play none none reverse",
           },
           x: i % 2 === 0 ? -150 : 150,
@@ -113,11 +114,13 @@ useEffect(() => {
           duration: 1.2,
           ease: "power3.out",
         });
+      }
 
+       if (content) {
         gsap.from(content, {
           scrollTrigger: {
             trigger: el,
-            start: "top 85%",
+            start: "top 80%",
             toggleActions: "play none none reverse",
           },
           x: i % 2 === 0 ? 150 : -150,
@@ -125,7 +128,9 @@ useEffect(() => {
           duration: 1.2,
           ease: "power3.out",
         });
-      });
+      }
+    });
+
 
       if (growthRef.current) {
         const cards = growthRef.current.querySelectorAll(".growth-card");

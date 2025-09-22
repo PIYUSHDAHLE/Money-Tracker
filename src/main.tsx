@@ -8,6 +8,7 @@ import App from "./App.tsx";
 import { Provider as HeroUiProvider } from "./provider.tsx";
 import "../src/styles/globals.css";
 import LenisInit from "./LenisInit.tsx";
+import './index.css'
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
