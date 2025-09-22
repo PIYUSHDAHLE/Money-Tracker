@@ -255,7 +255,7 @@ const HomePage: React.FC = () => {
       </section>
 
       <section className="benefits-section py-20 bg-gradient-to-b from-blue-50 to-white dark:from-black dark:to-gray-900 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
+        <div className="max-w-7xl mx-auto px-8 text-center relative z-10">
           <h2 className="text-4xl font-extrabold mb-6 text-blue-700 dark:text-blue-400">
             Why Choose Money Tracker?
           </h2>
