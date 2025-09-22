@@ -131,7 +131,7 @@ export default function SupportCenter() {
         </div>
       </section>
 
-      <section className="support-cards grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 md:px-17">
+      <section className="support-cards grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 md:px-23">
         {supportCards.map((card, index) => (
           <Card
             key={index}
@@ -160,7 +160,7 @@ export default function SupportCenter() {
         ))}
       </section>
 
-      <section className=" md:px-17 grid grid-cols-1 lg:grid-cols-2 gap-8 mt-16 items-start py-20">
+      <section className=" md:px-23 grid grid-cols-1 lg:grid-cols-2 gap-8 mt-16 items-start py-20">
         <div className="flex justify-center lg:sticky lg:top-20 self-start">
           <img
             src={faqImage}
@@ -206,7 +206,7 @@ export default function SupportCenter() {
         </div>
       </section>
 
-      <section className="steps-section py-20 text-center md:px-17">
+      <section className="steps-section py-20 text-center md:px-23">
         <h2 className="text-3xl font-bold mb-12">Getting Started in 3 Steps</h2>
         <div className="grid md:grid-cols-3 gap-8">
           <div className="step bg-white dark:bg-[#18181B] p-6 rounded-xl shadow-md">
@@ -229,7 +229,7 @@ export default function SupportCenter() {
           </div>
         </div>
       </section>
-      <section className="bg-gray-100 dark:bg-gray-800 py-20 md:mx-17 rounded-2xl">
+      <section className="bg-gray-100 dark:bg-gray-800 py-20 md:mx-23 rounded-2xl">
         <div className="container mx-auto px-3">
           <h2 className="text-3xl font-bold mb-12 text-center">
             Need More Help?
