@@ -137,7 +137,7 @@ export default function Dashboard() {
     }
   }
 
-  // ---------------- ECharts Config ----------------
+  //ECharts Config
   const chartOption = {
     backgroundColor: isDark ? "#1a1a1a" : "#f0f8ff",
     tooltip: { trigger: "axis" },
@@ -202,7 +202,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="container mx-auto p-6 space-y-6 dark:bg-black">
+    <div className="container lg:px-25 mx-auto p-6 space-y-6 dark:bg-black">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl dark:text-white font-semibold">Dashboard</h1>
         <div className="flex space-x-2">

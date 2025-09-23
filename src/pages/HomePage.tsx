@@ -122,13 +122,13 @@ const HomePage: React.FC = () => {
               className="h-24 w-24 mx-auto mb-6 rounded-full border-4 border-blue-400 shadow-lg"
               alt="Logo"
             />
-            <h1 className="text-5xl font-extrabold tracking-tight mb-4 text-blue-700 dark:text-blue-400">
+            <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-blue-700 dark:text-blue-400">
               Money Tracker
             </h1>
-            <p className="text-xl mb-4 text-blue-800 dark:text-blue-300 font-medium">
+            <p className="text-[18px] md:text-xl mb-4 text-blue-800 dark:text-blue-300 font-medium">
               Easily track, manage, and grow your finances
             </p>
-            <p className="text-lg max-w-2xl mx-auto mb-6 text-gray-700 dark:text-gray-300">
+            <p className="text-[14px] md:text-lg max-w-2xl mx-auto mb-6 text-gray-700 dark:text-gray-300">
               Stay on top of your spending, savings, and budgeting — all in one
               place.
             </p>
@@ -144,7 +144,7 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <section className="swiper-section py-20 lg:py-20 bg-gradient-to-b from-blue-50 to-white dark:from-black dark:to-gray-900 relative overflow-hidden">
+      <section className="swiper-section py-20 lg:px-32 bg-gradient-to-b from-blue-50 to-white dark:from-black dark:to-gray-900 relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <h2 className="text-4xl font-extrabold text-center mb-12 text-blue-700 dark:text-blue-400">
             What You Can Do
@@ -255,7 +255,7 @@ const HomePage: React.FC = () => {
       </section>
 
       <section className="benefits-section py-20 bg-gradient-to-b from-blue-50 to-white dark:from-black dark:to-gray-900 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-8 text-center relative z-10">
+        <div className="mx-auto px-8 lg:px-38 text-center relative z-10">
           <h2 className="text-4xl font-extrabold mb-6 text-blue-700 dark:text-blue-400">
             Why Choose Money Tracker?
           </h2>

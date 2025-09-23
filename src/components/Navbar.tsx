@@ -29,7 +29,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 px-30 z-50 backdrop-blur-md bg-white/60 dark:bg-black shadow-lg border-b border-gray-200 dark:border-gray-700">
+    <header className="sticky top-0 lg:px-30 z-50 backdrop-blur-md bg-white/60 dark:bg-black shadow-lg border-b border-gray-200 dark:border-gray-700">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <Link
           to="/"
@@ -268,7 +268,7 @@ export default function Navbar() {
                   />
                 </button>
                 {open && (
-                  <div className="absolute right-0 w-64 bg-blue-100 rounded-lg shadow-lg z-50 dark:bg-[#00142B] overflow-hidden">
+                  <div className="absolute left-0 w-44 bg-blue-100 rounded-lg shadow-lg z-50 dark:bg-[#00142B] overflow-hidden">
                     <ul>
                       <li>
                         <button
