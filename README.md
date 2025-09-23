@@ -1,4 +1,4 @@
-# Redux Auth (HeroUI + Tailwind) — Demo
+# Redux Auth (HeroUI + Tailwind) 
 
 ## Install
 
