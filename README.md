@@ -1,46 +1,75 @@
-# Redux Auth (HeroUI + Tailwind) 
+# 📊 Money Tracker
 
-## Install
-
-1. Create project folder and copy files into it (this repo structure)
-2. Install dependencies:
-
-```bash
-npm install
-# or
-pnpm install
-```
-
-3. Start dev server:
-
-```bash
-npm run dev
-```
-
-Open `http://localhost:5173` (Vite default). Login with one of the demo accounts:
-
-- Admin: `admin` / `admin123` (role: admin)
-- User: `user` / `user123` (role: user)
-
-## Notes
-- `src/services/authService.ts` is a mocked service that returns a fake JWT. Replace it with real API calls.
-- `src/utils/localStorage.ts` saves the token + user into `localStorage` under the key `redux_auth_demo_v1`.
-- `src/components/ProtectedRoute.tsx` enforces authentication and optional role-based access.
-- UI uses HeroUI components (placeholder import `@heroui/react`). If not available, replace imports with your UI components or plain Tailwind markup.
-
-## Next steps / Improvements
-- Integrate a real backend (Node/Express, NestJS, etc.) to issue real signed JWTs.
-- Add refresh-token support / token renewal.
-- Protect API calls by attaching Authorization headers using axios interceptors.
-- Add server-side RBAC checks for every protected API route.
-```
+Easily track, manage, and grow your finances with **Money Tracker**.  
+Stay on top of your spending, savings, and budgeting — all in one place.
 
 ---
 
-If you'd like, I can:
+## 🚀 Features
 
-- Convert this demo into a **full repo** and provide a downloadable zip.
-- Replace the mocked auth service with **real axios calls** to your backend (you provide the endpoints).
-- Translate the instructions to **Hindi**.
+### ✅ Core
 
-Open the canvas document above to copy any file. If you want the repo as a zip, say so and I'll generate it for you.
+- **Track Savings** – Visualize your savings goals and track progress over time.
+- **Insightful Reports** – Automatic reports and charts to understand spending habits.
+- **Smart Reminders** – Notifications for bills, goals, and important dates.
+- **Secure Transactions** – Bank-level encryption for complete safety.
+- **Global Access** – Use the app anywhere, anytime.
+- **Budgeting Made Simple** – Create monthly budgets and stay on track.
+
+### ⚡ How It Works
+
+1. Connect your accounts securely or add manual expenses.
+2. Categorize your spending and set up recurring budgets.
+3. Watch progress with interactive charts and alerts.
+4. Receive personalized tips to improve financial health.
+
+### 🌟 Why Choose Money Tracker?
+
+- 🔒 **Secure & Private** – Encrypted financial data, never shared.
+- 📈 **Real-Time Insights** – Up-to-date balance, spending, and alerts.
+- 🎯 **Smart Goal Setting** – Define savings goals and milestones.
+- 📊 **Easy Reports & Charts** – Visualize spending across categories.
+- 💻 **Mobile & Desktop Ready** – Access from any device.
+- 🤝 **Helpful Support & Tips** – Guidance to stay financially fit.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React.js, TypeScript, Vite
+- **UI:** [HeroUI](https://www.heroui.com/), Tailwind CSS, GSAP animations
+- **State Management:** Redux Toolkit
+- **Auth:** JWT (mocked service, easily replaceable with real API)
+
+---
+
+## ⚙️ Installation
+
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/your-username/money-tracker.git
+   cd money-tracker
+
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or 
+   pnpm install
+   ```
+3. Start development server:
+   ```bash
+npm run dev
+   ```
+4. Open app in browser:
+http://localhost:5173
+
+📸 Preview
+![alt text](image.png)
+
+📝 License
+
+This project is licensed under the MIT License.
+Feel free to use, modify, and share.
