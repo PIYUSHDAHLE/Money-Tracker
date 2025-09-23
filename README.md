@@ -61,13 +61,17 @@ Stay on top of your spending, savings, and budgeting — all in one place.
    ```
 3. Start development server:
    ```bash
-npm run dev
+   npm run dev
    ```
 4. Open app in browser:
-http://localhost:5173
+
+   ```bash
+   http://localhost:5173
+   ```
 
 📸 Preview
-![alt text](image.png)
+
+<img width="1783" height="850" alt="image" src="https://github.com/user-attachments/assets/8ca73ffd-5d8d-488b-b0ef-b3a48f693163" />
 
 📝 License
 
