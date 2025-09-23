@@ -101,9 +101,17 @@ export default function Navbar() {
                   onClick={() => setOpen(!open)}
                   className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-[#00142B] dark:hover:bg-gray-800 transition cursor-pointer"
                 >
-                  <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center">
-                    <User className="w-5 h-5 text-gray-600" />
-                  </div>
+                  {user.profilePicture ? (
+                    <img
+                      src={user.profilePicture}
+                      alt={user.name}
+                      className="w-8 h-8 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center">
+                      <User className="w-5 h-5 text-gray-600" />
+                    </div>
+                  )}
                   <span className="text-sm dark:text-[#00a2ff]">
                     {user.name}
                   </span>
@@ -124,10 +132,13 @@ export default function Navbar() {
                         </button>
                       </li>
                       <li>
-                        <button className="flex px-4 py-2 items-center hover:bg-blue-200 dark:hover:bg-gray-800 space-x-2 w-full"  onClick={() => nav("/account-setting")}>
+                        <button
+                          className="flex px-4 py-2 items-center hover:bg-blue-200 dark:hover:bg-gray-800 space-x-2 w-full"
+                          onClick={() => nav("/account-setting")}
+                        >
                           <Settings className="w-4 h-4" />
                           <span>Account Settings</span>
-                        </button> 
+                        </button>
                       </li>
                       <li>
                         <button
@@ -246,93 +257,104 @@ export default function Navbar() {
                 </NavLink>
               </nav>
 
-                        {user ? (
-            <>
-              <div
-                className="relative inline-block text-left"
-                onMouseEnter={() => setOpen(true)}
-                onMouseLeave={() => setOpen(false)}
-              >
-                <button
-                  onClick={() => setOpen(!open)}
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-[#00142B] dark:hover:bg-gray-800 transition cursor-pointer"
-                >
-                  <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center">
-                    <User className="w-5 h-5 text-gray-600" />
-                  </div>
-                  <span className="text-sm dark:text-[#00a2ff]">
-                    {user.name}
-                  </span>
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-300 ${open ? "rotate-180" : "rotate-0"}`}
-                  />
-                </button>
-                {open && (
-                  <div className="absolute left-0 w-44 bg-blue-100 rounded-lg shadow-lg z-50 dark:bg-[#00142B] overflow-hidden">
-                    <ul>
-                      <li>
-                        <button
-                          className="flex px-4 py-2 items-center hover:bg-blue-200 dark:hover:bg-gray-800 space-x-2 w-full"
-                          onClick={() => nav("/dashboard")}
-                        >
-                          <Layers className="w-4 h-4" />
-                          <span>Dashboard</span>
-                        </button>
-                      </li>
-                      <li>
-                        <button className="flex px-4 py-2 items-center hover:bg-blue-200 dark:hover:bg-gray-800 space-x-2 w-full" onClick={() => nav("/account-setting")}>
-                          <Settings className="w-4 h-4" />
-                          <span>Account Settings</span>
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className="flex px-4 py-2 items-center hover:bg-blue-200 dark:hover:bg-gray-800 space-x-2 w-full"
-                          onClick={() => nav("/support")}
-                        >
-                          <HelpCircle className="w-4 h-4" />
-                          <span>Support Center</span>
-                        </button>
-                      </li>
-                    </ul>
-                    <div className="border-t border-gray-300 dark:border-gray-700">
-                      <button
-                        className="w-full flex items-center space-x-2 px-[18px] py-2 hover:text-red-600 hover:bg-red-50 dark:hover:text-white dark:hover:bg-red-300/50 rounded-b-lg"
-                        onClick={() => {
-                          dispatch(logout());
-                          nav("/login");
-                        }}
-                      >
-                        <LogOut className="w-4 h-4" />
-                        <span>Log Out</span>
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </>
-          ) : (
-            <>
-             <div className="flex flex-col space-y-3 pt-6">
-                  <GlobalButton
-                    onClick={() => {
-                      setMenuOpen(false);
-                      nav("/login");
-                    }}
+              {user ? (
+                <>
+                  <div
+                    className="relative inline-block text-left"
+                    onMouseEnter={() => setOpen(true)}
+                    onMouseLeave={() => setOpen(false)}
                   >
-                    Login
-                  </GlobalButton>
-                  <GlobalButton
-                    onClick={() => {
-                      setMenuOpen(false);
-                      nav("/register");
-                    }}
-                  >
-                    Register
-                  </GlobalButton>
-                </div>
-            </>
-          )}
+                    <button
+                      onClick={() => setOpen(!open)}
+                      className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-[#00142B] dark:hover:bg-gray-800 transition cursor-pointer"
+                    >
+                      {user.profilePicture ? (
+                        <img
+                          src={user.profilePicture}
+                          alt={user.name}
+                          className="w-8 h-8 rounded-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center">
+                          <User className="w-5 h-5 text-gray-600" />
+                        </div>
+                      )}
+                      <span className="text-sm dark:text-[#00a2ff]">
+                        {user.name}
+                      </span>
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-300 ${open ? "rotate-180" : "rotate-0"}`}
+                      />
+                    </button>
+                    {open && (
+                      <div className="absolute left-0 w-44 bg-blue-100 rounded-lg shadow-lg z-50 dark:bg-[#00142B] overflow-hidden">
+                        <ul>
+                          <li>
+                            <button
+                              className="flex px-4 py-2 items-center hover:bg-blue-200 dark:hover:bg-gray-800 space-x-2 w-full"
+                              onClick={() => nav("/dashboard")}
+                            >
+                              <Layers className="w-4 h-4" />
+                              <span>Dashboard</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              className="flex px-4 py-2 items-center hover:bg-blue-200 dark:hover:bg-gray-800 space-x-2 w-full"
+                              onClick={() => nav("/account-setting")}
+                            >
+                              <Settings className="w-4 h-4" />
+                              <span>Account Settings</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              className="flex px-4 py-2 items-center hover:bg-blue-200 dark:hover:bg-gray-800 space-x-2 w-full"
+                              onClick={() => nav("/support")}
+                            >
+                              <HelpCircle className="w-4 h-4" />
+                              <span>Support Center</span>
+                            </button>
+                          </li>
+                        </ul>
+                        <div className="border-t border-gray-300 dark:border-gray-700">
+                          <button
+                            className="w-full flex items-center space-x-2 px-[18px] py-2 hover:text-red-600 hover:bg-red-50 dark:hover:text-white dark:hover:bg-red-300/50 rounded-b-lg"
+                            onClick={() => {
+                              dispatch(logout());
+                              nav("/login");
+                            }}
+                          >
+                            <LogOut className="w-4 h-4" />
+                            <span>Log Out</span>
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex flex-col space-y-3 pt-6">
+                    <GlobalButton
+                      onClick={() => {
+                        setMenuOpen(false);
+                        nav("/login");
+                      }}
+                    >
+                      Login
+                    </GlobalButton>
+                    <GlobalButton
+                      onClick={() => {
+                        setMenuOpen(false);
+                        nav("/register");
+                      }}
+                    >
+                      Register
+                    </GlobalButton>
+                  </div>
+                </>
+              )}
             </motion.div>
           </motion.div>
         )}
