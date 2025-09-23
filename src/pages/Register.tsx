@@ -2,14 +2,9 @@ import React, { useState } from "react";
 import { useAppDispatch } from "../hooks";
 import { registerUser } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
-import {
-  Input,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-} from "@heroui/react";
+import { Input, Card, CardHeader, CardBody, CardFooter } from "@heroui/react";
 import GlobalButton from "@/components/common/GlobalButton";
+import { Helmet } from "react-helmet";
 
 export const EyeSlashFilledIcon = (props: any) => {
   return (
@@ -92,55 +87,65 @@ export default function Register() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-[#1e88e5] via-[#42a5f5] to-[#90caf9] dark:from-black dark:via-gray-900 dark:to-gray-800">
-      <Card className="w-full max-w-md p-4">
-        <CardHeader className="flex justify-center">
-          <h2 className="text-2xl font-semibold">Register</h2>
-        </CardHeader>
-        <form onSubmit={submit}>
-          <CardBody className="space-y-4">
-            <Input
-              label="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-            <Input
-              label="Email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <Input
-              label="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              type={isVisible ? "text" : "password"}
-              endContent={
-                <button
-                  aria-label="toggle password visibility"
-                  className="focus:outline-none"
-                  type="button"
-                  onClick={toggleVisibility}
-                >
-                  {isVisible ? (
-                    <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                  ) : (
-                    <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                  )}
-                </button>
-              }
-            />
-          </CardBody>
-          <CardFooter className="flex justify-end">
+    <>
+      <Helmet>
+        <title>Create Account | Money Tracker</title>
+                <meta name="title" content="Create Account | Money Tracker" />
+        <meta
+          name="description"
+          content="Join Money Tracker today to track expenses, set budgets, and grow your savings with ease."
+        />
+      </Helmet>
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-[#1e88e5] via-[#42a5f5] to-[#90caf9] dark:from-black dark:via-gray-900 dark:to-gray-800">
+        <Card className="w-full max-w-md p-4">
+          <CardHeader className="flex justify-center">
+            <h2 className="text-2xl font-semibold">Register</h2>
+          </CardHeader>
+          <form onSubmit={submit}>
+            <CardBody className="space-y-4">
+              <Input
+                label="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <Input
+                label="Email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <Input
+                label="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                type={isVisible ? "text" : "password"}
+                endContent={
+                  <button
+                    aria-label="toggle password visibility"
+                    className="focus:outline-none"
+                    type="button"
+                    onClick={toggleVisibility}
+                  >
+                    {isVisible ? (
+                      <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                    ) : (
+                      <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                    )}
+                  </button>
+                }
+              />
+            </CardBody>
+            <CardFooter className="flex justify-end">
               <GlobalButton type="submit" className="w-full">
-              Register
-            </GlobalButton>
-          </CardFooter>
-        </form>
-      </Card>
-    </div>
+                Register
+              </GlobalButton>
+            </CardFooter>
+          </form>
+        </Card>
+      </div>
+    </>
   );
 }

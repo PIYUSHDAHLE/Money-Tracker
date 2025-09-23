@@ -4,6 +4,7 @@ import { forgotPasswordUser } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
 import { Input, Card, CardHeader, CardBody, CardFooter } from "@heroui/react";
 import GlobalButton from "@/components/common/GlobalButton";
+import { Helmet } from "react-helmet";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -24,32 +25,46 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-[#1e88e5] via-[#42a5f5] to-[#90caf9] dark:from-black dark:via-gray-900 dark:to-gray-800">
-      <Card className="w-full max-w-md p-4">
-        <CardHeader className="flex justify-center">
-          <h2 className="text-2xl font-semibold">Forgot Password</h2>
-        </CardHeader>
-        <form onSubmit={submit}>
-          <CardBody className="space-y-4">
-            <Input
-              label="Email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            {error && <p className="text-red-500 ml-2 text-sm">{error}</p>}
-            {successMsg && (
-              <p className="text-green-500 ml-2 text-sm">{successMsg}</p>
-            )}
-          </CardBody>
-          <CardFooter className="flex justify-end">
-            <GlobalButton type="submit" className="w-full" isLoading={loading}>
-              Send
-            </GlobalButton>
-          </CardFooter>
-        </form>
-      </Card>
-    </div>
+    <>
+      <Helmet>
+        <title>Forgot Password | Money Tracker</title>
+                <meta name="title" content="Forgot Password | Money Tracker" />
+        <meta
+          name="description"
+          content="Reset your Money Tracker account password easily and regain access to your finances."
+        />
+      </Helmet>
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-[#1e88e5] via-[#42a5f5] to-[#90caf9] dark:from-black dark:via-gray-900 dark:to-gray-800">
+        <Card className="w-full max-w-md p-4">
+          <CardHeader className="flex justify-center">
+            <h2 className="text-2xl font-semibold">Forgot Password</h2>
+          </CardHeader>
+          <form onSubmit={submit}>
+            <CardBody className="space-y-4">
+              <Input
+                label="Email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              {error && <p className="text-red-500 ml-2 text-sm">{error}</p>}
+              {successMsg && (
+                <p className="text-green-500 ml-2 text-sm">{successMsg}</p>
+              )}
+            </CardBody>
+            <CardFooter className="flex justify-end">
+              <GlobalButton
+                type="submit"
+                className="w-full"
+                isLoading={loading}
+              >
+                Send
+              </GlobalButton>
+            </CardFooter>
+          </form>
+        </Card>
+      </div>
+    </>
   );
 }

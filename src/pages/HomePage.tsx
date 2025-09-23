@@ -9,6 +9,7 @@ import "swiper/css/pagination";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
+import { Helmet } from "react-helmet";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,7 +60,7 @@ const HomePage: React.FC = () => {
           ease: "power2.out",
         },
         "-=0.5"
-      ); 
+      );
 
     const worksTl = gsap.timeline({
       scrollTrigger: {
@@ -86,7 +87,7 @@ const HomePage: React.FC = () => {
       scrollTrigger: {
         trigger: ".benefits-section",
         start: "top 75%",
-        toggleActions: "play reverse play reverse",  
+        toggleActions: "play reverse play reverse",
       },
     });
     benefitsTl.fromTo(
@@ -105,6 +106,14 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Money Tracker | Track, Manage & Grow Your Finances</title>
+                <meta name="title" content="Money Tracker | Track, Manage & Grow Your Finances" />
+        <meta
+          name="description"
+          content="Stay on top of your spending, savings, and budgeting with Money Tracker — your all-in-one finance manager."
+        />
+      </Helmet>
       <section
         className="hero-section relative h-screen flex items-center justify-center text-center text-gray-900 dark:text-white overflow-hidden"
         style={{
@@ -197,12 +206,18 @@ const HomePage: React.FC = () => {
               <SwiperSlide key={i} className="swiper-slide py-10">
                 <div className="p-6 bg-white dark:bg-black rounded-xl border border-blue-200 dark:border-blue-900 shadow-lg">
                   <div className="mb-2">
-                    <img src={card.icon} alt={card.title} className="w-full rounded-2xl object-cover" />
+                    <img
+                      src={card.icon}
+                      alt={card.title}
+                      className="w-full rounded-2xl object-cover"
+                    />
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-blue-700 dark:text-blue-400">
                     {card.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300">{card.desc}</p>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {card.desc}
+                  </p>
                 </div>
               </SwiperSlide>
             ))}
