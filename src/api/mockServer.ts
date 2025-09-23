@@ -17,7 +17,15 @@ function writeTx(t: Transaction[]) { localStorage.setItem(TX_KEY, JSON.stringify
 export async function register(name: string, email: string, password: string) {
   const users = readUsers()
   if (users.find(u => u.email === email)) throw new Error('Email already registered')
-  const user: User = { id: uuid(), name, email, password, token: 'token-' + Math.random().toString(36).slice(2) }
+  const user: User = {
+    id: uuid(), name, email, password, token: 'token-' + Math.random().toString(36).slice(2),
+    phone: '',
+    profilePicture: '',
+    permanentAddress: '',
+    currentAddress: '',
+    familyCount: 0,
+    familyMembers: []
+  }
   users.push(user)
   writeUsers(users)
   return { ...user, password: undefined }
@@ -84,3 +92,33 @@ export async function fetchTransactionsForUser(userId: string) {
   const all = readTx()
   return all.filter(t => t.userId === userId)
 }
+
+// mockServer.ts
+
+export function getUser(userId: string) {
+  const users = readUsers();
+  const user = users.find((u) => u.id === userId);
+  if (!user) throw new Error("User not found");
+  return { ...user, password: undefined }; // never expose password
+}
+
+export function updateUser(updatedData: Partial<User>) {
+  const users = readUsers();
+
+  if (!updatedData.id) {
+    throw new Error("User ID is required to update");
+  }
+
+  const idx = users.findIndex((u) => u.id === updatedData.id);
+  if (idx === -1) throw new Error("User not found");
+
+  // merge existing user with updates
+  users[idx] = { ...users[idx], ...updatedData };
+
+  writeUsers(users);
+
+  return { ...users[idx], password: undefined }; // return safe user object
+}
+
+
+

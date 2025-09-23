@@ -17,6 +17,7 @@ import Footer from "./components/Footer";
 import AboutUs from "./pages/AboutUs";
 import ScrollToTop from "./components/ScrollToTop";
 import ContactUs from "./pages/ContactUs";
+import AccountSettings from "./pages/AccountSettings";
 
 export default function App() {
   const theme = useSelector((s: RootState) => s.theme.mode);
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/account-setting" element={<AccountSettings />} />
         <Route path="/support" element={<SupportCenter />} />
         <Route
           path="/dashboard"

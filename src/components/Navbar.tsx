@@ -124,10 +124,10 @@ export default function Navbar() {
                         </button>
                       </li>
                       <li>
-                        <button className="flex px-4 py-2 items-center hover:bg-blue-200 dark:hover:bg-gray-800 space-x-2 w-full">
+                        <button className="flex px-4 py-2 items-center hover:bg-blue-200 dark:hover:bg-gray-800 space-x-2 w-full"  onClick={() => nav("/account-setting")}>
                           <Settings className="w-4 h-4" />
                           <span>Account Settings</span>
-                        </button>
+                        </button> 
                       </li>
                       <li>
                         <button
@@ -280,7 +280,7 @@ export default function Navbar() {
                         </button>
                       </li>
                       <li>
-                        <button className="flex px-4 py-2 items-center hover:bg-blue-200 dark:hover:bg-gray-800 space-x-2 w-full">
+                        <button className="flex px-4 py-2 items-center hover:bg-blue-200 dark:hover:bg-gray-800 space-x-2 w-full" onClick={() => nav("/account-setting")}>
                           <Settings className="w-4 h-4" />
                           <span>Account Settings</span>
                         </button>
