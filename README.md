@@ -50,7 +50,6 @@ Stay on top of your spending, savings, and budgeting — all in one place.
    ```bash
    git clone https://github.com/your-username/money-tracker.git
    cd money-tracker
-
    ```
 
 2. Install dependencies:

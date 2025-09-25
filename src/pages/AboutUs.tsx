@@ -417,7 +417,7 @@ export default function AboutUs() {
         </section>
 
         {/* Section 4 - Vision / Values / Growth Blocks */}
-        <section className="vision-section py-20 px-6 md:px-16 lg:px-38 space-y-20">
+        <section className="lg:vision-section py-20 px-6 md:px-16 lg:px-38 space-y-20">
           {blocks.map((block, i) => (
             <div
               key={i}
@@ -427,7 +427,7 @@ export default function AboutUs() {
               data-align={block.align}
               className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
             >
-              <div className="block md:hidden space-y-4 vision-content">
+              <div className="block md:hidden space-y-4 lg:vision-content">
                 <h2 className="text-3xl font-bold flex items-center gap-2">
                   {block.icon} {block.title}
                 </h2>
@@ -457,7 +457,7 @@ export default function AboutUs() {
                       alt={block.title}
                     />
                   </div>
-                  <div className="hidden md:block vision-content space-y-4">
+                  <div className="hidden md:block lg:vision-content space-y-4">
                     <h2 className="text-3xl font-bold flex items-center gap-2">
                       {block.icon} {block.title}
                     </h2>
@@ -474,7 +474,7 @@ export default function AboutUs() {
                 </>
               ) : (
                 <>
-                  <div className="hidden md:block vision-content space-y-4">
+                  <div className="hidden md:block lg:vision-content space-y-4">
                     <h2 className="text-3xl font-bold flex items-center gap-2">
                       {block.icon} {block.title}
                     </h2>
