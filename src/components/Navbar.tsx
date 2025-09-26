@@ -287,12 +287,12 @@ export default function Navbar() {
                       />
                     </button>
                     {open && (
-                      <div className="absolute left-0 w-44 bg-blue-100 rounded-lg shadow-lg z-50 dark:bg-[#00142B] overflow-hidden">
+                      <div className="absolute left-0 w-50 bg-blue-100 rounded-lg shadow-lg z-50 dark:bg-[#00142B] overflow-hidden">
                         <ul>
                           <li>
                             <button
                               className="flex px-4 py-2 items-center hover:bg-blue-200 dark:hover:bg-gray-800 space-x-2 w-full"
-                              onClick={() => nav("/dashboard")}
+                              onClick={() => {nav("/dashboard"); setMenuOpen(false);}}
                             >
                               <Layers className="w-4 h-4" />
                               <span>Dashboard</span>
@@ -301,7 +301,7 @@ export default function Navbar() {
                           <li>
                             <button
                               className="flex px-4 py-2 items-center hover:bg-blue-200 dark:hover:bg-gray-800 space-x-2 w-full"
-                              onClick={() => nav("/account-setting")}
+                              onClick={() => {nav("/account-setting"); setMenuOpen(false);}}
                             >
                               <Settings className="w-4 h-4" />
                               <span>Account Settings</span>
@@ -310,7 +310,7 @@ export default function Navbar() {
                           <li>
                             <button
                               className="flex px-4 py-2 items-center hover:bg-blue-200 dark:hover:bg-gray-800 space-x-2 w-full"
-                              onClick={() => nav("/support")}
+                                onClick={() => {nav("/support"); setMenuOpen(false);}}
                             >
                               <HelpCircle className="w-4 h-4" />
                               <span>Support Center</span>
