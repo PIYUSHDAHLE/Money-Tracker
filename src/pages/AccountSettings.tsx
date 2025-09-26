@@ -167,7 +167,7 @@ export default function AccountSettings() {
         />
       </Helmet>
 
-      <div className="container mx-auto p-6 lg:px-25 space-y-6 dark:bg-black">
+      <div className="p-6 lg:px-38 space-y-6 dark:bg-black">
         <h1 className="text-2xl font-semibold dark:text-white mb-4">
           Account Settings
         </h1>
