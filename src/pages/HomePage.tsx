@@ -279,7 +279,7 @@ const HomePage: React.FC = () => {
             clarity, and confidence in your finances.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
             {[
               {
                 img: "/images/money-tracker-by-piyush-dahle-home-benefit-secure-icon.svg",
@@ -314,7 +314,7 @@ const HomePage: React.FC = () => {
             ].map((b, idx) => (
               <div
                 key={idx}
-                className="benefit-card p-8 bg-white dark:bg-black rounded-2xl shadow-lg border border-blue-100 dark:border-blue-900 flex flex-col items-center text-center"
+                className="md:benefit-card p-8 bg-white dark:bg-black rounded-2xl shadow-lg border border-blue-100 dark:border-blue-900 flex flex-col items-center text-center"
               >
                 <Image
                   src={b.img}
