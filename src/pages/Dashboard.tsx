@@ -212,7 +212,7 @@ export default function Dashboard() {
         />
       </Helmet>
 
-      <div className="container lg:px-25 mx-auto p-6 space-y-6 dark:bg-black">
+      <div className="lg:px-38 p-6 space-y-6 dark:bg-black">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl dark:text-white font-semibold">Dashboard</h1>
           <div className="flex space-x-2">
