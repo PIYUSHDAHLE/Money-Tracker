@@ -10,12 +10,17 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
 import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const HomePage: React.FC = () => {
+  const nav = useNavigate();
+  const user = useSelector((s: RootState) => s.auth.user);
+
   useEffect(() => {
-    // Smooth scroll
     const lenis = new Lenis();
     function raf(time: number) {
       lenis.raf(time);
@@ -108,7 +113,10 @@ const HomePage: React.FC = () => {
     <div>
       <Helmet>
         <title>Money Tracker | Track, Manage & Grow Your Finances</title>
-                <meta name="title" content="Money Tracker | Track, Manage & Grow Your Finances" />
+        <meta
+          name="title"
+          content="Money Tracker | Track, Manage & Grow Your Finances"
+        />
         <meta
           name="description"
           content="Stay on top of your spending, savings, and budgeting with Money Tracker — your all-in-one finance manager."
@@ -141,11 +149,36 @@ const HomePage: React.FC = () => {
               Stay on top of your spending, savings, and budgeting — all in one
               place.
             </p>
-            <div className="flex justify-center gap-4">
-              <button className="px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold shadow-lg">
-                Get Started
-              </button>
-              <button className="px-6 py-3 rounded-lg border border-blue-500 bg-white text-blue-600 dark:bg-black dark:text-blue-400 font-semibold">
+            <div className="flex flex-col md:flex-row justify-center gap-4">
+              {user ? (
+                <>
+                  <button
+                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold shadow-lg"
+                    onClick={() => {
+                      nav("/dashboard");
+                    }}
+                  >
+                    Dashboard
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold shadow-lg"
+                    onClick={() => {
+                      nav("/login");
+                    }}
+                  >
+                    Get Started
+                  </button>
+                </>
+              )}
+              <button
+                className="px-6 py-3 rounded-lg border border-blue-500 bg-white text-blue-600 dark:bg-black dark:text-blue-400 font-semibold"
+                onClick={() => {
+                  nav("/about");
+                }}
+              >
                 Learn More
               </button>
             </div>
