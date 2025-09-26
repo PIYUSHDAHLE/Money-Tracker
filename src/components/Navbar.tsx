@@ -30,7 +30,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 lg:px-30 z-50 backdrop-blur-md bg-white/60 dark:bg-black shadow-lg border-b border-gray-200 dark:border-gray-700">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div className=" px-4 py-3 flex justify-between items-center">
         <Link
           to="/"
           className="font-bold text-lg text-primary flex items-center justify-center gap-2"
